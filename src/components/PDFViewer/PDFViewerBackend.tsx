@@ -27,6 +27,13 @@ export const PDFViewerBackend = ({
   iframe.src = `${viewerLocation}${queryString}`;
   iframe.style.width = "100%";
   iframe.style.height = "94%";
+
+  iframe.setAttribute(
+    "sandbox",
+    "allow-scripts allow-same-origin allow-forms allow-downloads",
+  );
+  iframe.setAttribute("allow", "cross-origin-isolated");
+
   if (sourceDeterminer.isBase64Source) {
     iframe.addEventListener("beforeunload", (event: BeforeUnloadEvent) => {
       event.preventDefault();

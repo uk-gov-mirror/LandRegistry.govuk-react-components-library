@@ -1,0 +1,2 @@
+# Set correct MIME type for .mjs files
+AddType text/javascript .mjs

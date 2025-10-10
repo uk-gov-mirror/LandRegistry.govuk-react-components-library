@@ -43,6 +43,39 @@ const config: StorybookConfig = {
     config.resolve.fallback = {
       assert: require.resolve("assert/"),
     };
+
+    // Configure dev server to serve .mjs files with correct MIME type
+    config.devServer = {
+      ...config.devServer,
+      setupMiddlewares: (middlewares, devServer) => {
+        // Add middleware to set correct MIME type for .mjs files
+        devServer.app.use((req, res, next) => {
+          if (req.url && req.url.endsWith(".mjs")) {
+            res.setHeader("Content-Type", "text/javascript");
+            res.setHeader("X-Content-Type-Options", "nosniff");
+          }
+          next();
+        });
+
+        return middlewares;
+      },
+      // Configure static file serving with proper headers
+      static: {
+        ...config.devServer?.static,
+        serveIndex: true,
+        watch: true,
+      },
+      // Add headers for all responses
+      headers: {
+        ...config.devServer?.headers,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods":
+          "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+        "Access-Control-Allow-Headers":
+          "X-Requested-With, content-type, Authorization",
+      },
+    };
+
     return config;
   },
 };
