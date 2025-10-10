@@ -4,10 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.0.3](https://github.com/LandRegistry/govuk-react-components-library/compare/v1.0.2...v1.0.3) (2025-10-10)
 
-
 ### Features
 
-* update packages and allow for local object creation before display of pdf ([40c4c72](https://github.com/LandRegistry/govuk-react-components-library/commit/40c4c72ad5ba4bfdc8b61fc29ddc7fa1e1583dc1))
+- update packages and allow for local object creation before display of pdf ([40c4c72](https://github.com/LandRegistry/govuk-react-components-library/commit/40c4c72ad5ba4bfdc8b61fc29ddc7fa1e1583dc1))
 
 ### [1.0.2](https://github.com/LandRegistry/govuk-react-components-library/compare/v1.0.1...v1.0.2) (2025-07-30)
 
