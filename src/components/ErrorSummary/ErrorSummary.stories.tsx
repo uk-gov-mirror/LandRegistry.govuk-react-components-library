@@ -12,11 +12,9 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof ErrorSummary> = {
   title: "GOVUK Design System/ErrorSummary",
   component: ErrorSummary,
-  decorators: [
-    (Story) => {
+  decorators: [(Story) => {
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -25,8 +23,7 @@ type Story = StoryObj<typeof ErrorSummary>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -35,31 +32,20 @@ export const Default: Story = {
 
 export const WithoutLinks: Story = {
   name: "without links",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "without links")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "without links")?.options },
 };
 
 export const MixedWithAndWithoutLinks: Story = {
   name: "mixed with and without links",
-  args: {
-    ...examplesFromFixtures.find(
-      (f) => f.name === "mixed with and without links",
-    )?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "mixed with and without links")?.options },
 };
 
 export const WithDescriptionOnly: Story = {
   name: "with description only",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with description only")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with description only")?.options },
 };
 
 export const WithEverything: Story = {
   name: "with everything",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with everything")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with everything")?.options },
 };

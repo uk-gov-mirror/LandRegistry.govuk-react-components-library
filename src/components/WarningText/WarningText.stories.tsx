@@ -12,11 +12,9 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof WarningText> = {
   title: "GOVUK Design System/WarningText",
   component: WarningText,
-  decorators: [
-    (Story) => {
+  decorators: [(Story) => {
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -25,8 +23,7 @@ type Story = StoryObj<typeof WarningText>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -35,7 +32,5 @@ export const Default: Story = {
 
 export const MultipleLines: Story = {
   name: "multiple lines",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "multiple lines")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "multiple lines")?.options },
 };

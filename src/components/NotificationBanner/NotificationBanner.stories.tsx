@@ -12,11 +12,9 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof NotificationBanner> = {
   title: "GOVUK Design System/NotificationBanner",
   component: NotificationBanner,
-  decorators: [
-    (Story) => {
+  decorators: [(Story) => {
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -25,8 +23,7 @@ type Story = StoryObj<typeof NotificationBanner>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -35,32 +32,20 @@ export const Default: Story = {
 
 export const WithTextAsHtml: Story = {
   name: "with text as html",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with text as html")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with text as html")?.options },
 };
 
 export const WithTypeAsSuccess: Story = {
   name: "with type as success",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with type as success")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with type as success")?.options },
 };
 
 export const WithLongHeading: Story = {
   name: "with long heading",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with long heading")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with long heading")?.options },
 };
 
 export const WithLotsOfContent: Story = {
   name: "with lots of content",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with lots of content")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with lots of content")?.options },
 };

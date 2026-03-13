@@ -12,11 +12,9 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof Button> = {
   title: "GOVUK Design System/Button",
   component: Button,
-  decorators: [
-    (Story) => {
+  decorators: [(Story) => {
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -25,8 +23,7 @@ type Story = StoryObj<typeof Button>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -48,16 +45,9 @@ export const Start: Story = {
   args: { ...examplesFromFixtures.find((f) => f.name === "start")?.options },
 };
 
-export const Input: Story = {
-  name: "input",
-  args: { ...examplesFromFixtures.find((f) => f.name === "input")?.options },
-};
-
 export const Secondary: Story = {
   name: "secondary",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "secondary")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "secondary")?.options },
 };
 
 export const Warning: Story = {

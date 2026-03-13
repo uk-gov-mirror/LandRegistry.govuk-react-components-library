@@ -1,9 +1,6 @@
+// src/components/Accordion/Accordion.scss
 // GOV.UK design system
-$govuk-images-path: "~govuk-frontend/dist/govuk/assets/images/";
-$govuk-fonts-path: "~govuk-frontend/dist/govuk/assets/fonts/";
-$govuk-assets-path: "~govuk-frontend/govuk/assets/";
-$govuk-font-family: "Arial", sans-serif;
+// To customise brand colour in v6 use:
+// $govuk-functional-colours: (brand: #87c426);
 
-// $govuk-brand-colour: #87c426;
-
-@import "~govuk-frontend/dist/govuk/components/accordion/accordion";
+@use "~govuk-frontend/dist/govuk/components/accordion" as *;

@@ -1,3 +1,4 @@
+// src/index.scss
 // GOV.UK design system
 $govuk-images-path: "~govuk-frontend/dist/govuk/assets/images/";
 $govuk-fonts-path: "~govuk-frontend/dist/govuk/assets/fonts/";
@@ -6,4 +7,6 @@ $govuk-font-family: "Arial", sans-serif;
 
 // $govuk-brand-colour: #87c426;
 
-@import "~govuk-frontend/dist/govuk/all";
+@use "~govuk-frontend/dist/govuk/index" as *;
+
+$govuk-functional-colours: (brand: #87c426);

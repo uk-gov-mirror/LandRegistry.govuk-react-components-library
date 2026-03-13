@@ -12,11 +12,9 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof CookieBanner> = {
   title: "GOVUK Design System/CookieBanner",
   component: CookieBanner,
-  decorators: [
-    (Story) => {
+  decorators: [(Story) => {
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -25,8 +23,7 @@ type Story = StoryObj<typeof CookieBanner>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -35,25 +32,15 @@ export const Default: Story = {
 
 export const AcceptedConfirmationBanner: Story = {
   name: "accepted confirmation banner",
-  args: {
-    ...examplesFromFixtures.find(
-      (f) => f.name === "accepted confirmation banner",
-    )?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "accepted confirmation banner")?.options },
 };
 
 export const RejectedConfirmationBanner: Story = {
   name: "rejected confirmation banner",
-  args: {
-    ...examplesFromFixtures.find(
-      (f) => f.name === "rejected confirmation banner",
-    )?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "rejected confirmation banner")?.options },
 };
 
 export const WithHtml: Story = {
   name: "with html",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with html")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with html")?.options },
 };

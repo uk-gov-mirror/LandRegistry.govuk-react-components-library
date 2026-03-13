@@ -1,4 +1,4 @@
-@import "~govuk-frontend/dist/govuk/base";
+@use "~govuk-frontend/dist/govuk/base" as *;
 
 .govuk-back-link.back-link-style-override:hover,
 .govuk-back-link.back-link-style-override a:hover {
