@@ -1,34 +1,19 @@
-import React, { useEffect } from "react";
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/tabs/fixtures.json
+// Regenerate: npm run generate-stories
+
+import React from "react";
 import "./Tabs.scss";
 import Tabs from "./Tabs";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import fixtures from "govuk-frontend/dist/govuk/components/tabs/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-import { ConfigureOverallTabs } from "./Tabs.config";
-
-let configured = false;
 const meta: Meta<typeof Tabs> = {
   title: "GOVUK Design System/Tabs",
   component: Tabs,
   decorators: [
-    (Story, { parameters }) => {
-      useEffect(() => {
-        const configureTabs = () => {
-          const isDocsMode = window.location.search.includes("viewMode=docs");
-          if (
-            isDocsMode &&
-            !configured &&
-            parameters.initializeConfigurations
-          ) {
-            ConfigureOverallTabs();
-            configured = true;
-          } else if (!isDocsMode) {
-            ConfigureOverallTabs();
-          }
-        };
-        configureTabs();
-      }, []);
+    (Story) => {
       return <Story />;
     },
   ],
@@ -38,21 +23,20 @@ const meta: Meta<typeof Tabs> = {
 export default meta;
 type Story = StoryObj<typeof Tabs>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const TabsWithAnchorInPanel = {
-  ...createStory(1),
-  parameters: { initializeConfigurations: true },
+export const TabsWithAnchorInPanel: Story = {
+  name: "tabs-with-anchor-in-panel",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "tabs-with-anchor-in-panel")
+      ?.options,
+  },
 };

@@ -27,6 +27,14 @@ const createConfig = (input, output) => ({
     },
   ],
   external: [...externalDeps, ...output.externalLibs],
+  onwarn(warning, warn) {
+    if (
+      warning.code === "MODULE_LEVEL_DIRECTIVE" &&
+      warning.message.includes('"use client"')
+    )
+      return;
+    warn(warning);
+  },
   plugins: [
     peerDepsExternal(),
     resolve(),

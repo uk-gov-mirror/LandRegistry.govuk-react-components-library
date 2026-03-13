@@ -1,8 +1,9 @@
+// .storybook/preset.ts
 import type { Indexer } from "storybook/internal/types";
 import { loadCsf } from "storybook/internal/csf-tools";
 import { serverRequire } from "storybook/internal/common";
-import { compile } from "./compile";
-import { vite, webpack, rollup, STORIES_REGEX } from "./unplugin";
+import { compile } from "./compile.ts";
+import { vite, webpack, rollup, STORIES_REGEX } from "./unplugin.ts";
 
 const logger = console;
 

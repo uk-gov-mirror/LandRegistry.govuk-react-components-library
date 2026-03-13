@@ -70,8 +70,8 @@ const PDFViewer: React.FC<PDFViewerProps> = (props) => {
 
       // 1) Let ResolvePDFSource handle base64/data/blob inputs synchronously.
       try {
-        const resolved = ResolvePDFSource(src as any);
-        if (resolved && resolved.source) {
+        const resolved = ResolvePDFSource(src);
+        if (resolved?.source) {
           sourceToUse = resolved.source;
           if (resolved.isBase64Source) {
             // ResolvePDFSource created an object URL for us (data/blob/base64)
@@ -96,16 +96,11 @@ const PDFViewer: React.FC<PDFViewerProps> = (props) => {
         const controller = new AbortController();
         fetchControllerRef.current = controller;
         try {
-          const resp = await fetch(src as string, {
+          const resp = await fetch(src, {
             signal: controller.signal,
             credentials: "omit",
           });
-          if (!resp.ok) {
-            console.warn(
-              `PDFViewer: fetch returned ${resp.status} ${resp.statusText} for ${src}`,
-            );
-            // fallback: keep using original src
-          } else {
+          if (resp.ok) {
             const blob = await resp.blob();
             if (blob && blob.size > 0) {
               const obj = URL.createObjectURL(blob);
@@ -117,9 +112,14 @@ const PDFViewer: React.FC<PDFViewerProps> = (props) => {
                 "PDFViewer: fetched blob is empty - falling back to original src",
               );
             }
+          } else {
+            console.warn(
+              `PDFViewer: fetch returned ${resp.status} ${resp.statusText} for ${src}`,
+            );
+            // fallback: keep using original src
           }
-        } catch (err: any) {
-          if (err?.name === "AbortError") {
+        } catch (err: unknown) {
+          if (err instanceof Error && err.name === "AbortError") {
             // aborted, nothing to do
             if (!mounted) return;
           } else {

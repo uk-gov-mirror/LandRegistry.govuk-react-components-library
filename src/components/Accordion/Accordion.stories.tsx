@@ -1,3 +1,7 @@
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/accordion/fixtures.json
+// Regenerate: npm run generate-stories
+
 import React from "react";
 import "./Accordion.scss";
 import Accordion from "./Accordion";
@@ -14,20 +18,13 @@ const meta: Meta<typeof Accordion> = {
   decorators: [
     (Story, { parameters }) => {
       React.useEffect(() => {
-        const configureAccordion = () => {
-          const isDocsMode = window.location.search.includes("viewMode=docs");
-          if (
-            isDocsMode &&
-            !configured &&
-            parameters.initializeConfigurations
-          ) {
-            ConfigureOverallAccordion();
-            configured = true;
-          } else if (!isDocsMode) {
-            ConfigureOverallAccordion();
-          }
-        };
-        configureAccordion();
+        const isDocsMode = window.location.search.includes("viewMode=docs");
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallAccordion();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallAccordion();
+        }
       }, []);
       return <Story />;
     },
@@ -38,26 +35,39 @@ const meta: Meta<typeof Accordion> = {
 export default meta;
 type Story = StoryObj<typeof Accordion>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const WithAdditionalDescriptions = createStory(1);
-export const WithLongContentAndDescription = createStory(2);
-export const WithOneSectionOpen = createStory(3);
-export const WithAllSectionsAlreadyOpen = createStory(4);
-export const WithFocusableElementsInside = createStory(5);
-export const WithTranslations = {
-  ...createStory(6),
-  parameters: { initializeConfigurations: true },
+export const WithAdditionalDescriptions: Story = {
+  name: "with additional descriptions",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with additional descriptions",
+    )?.options,
+  },
+};
+
+export const WithLongContentAndDescription: Story = {
+  name: "with long content and description",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with long content and description",
+    )?.options,
+  },
+};
+
+export const WithAllSectionsAlreadyOpen: Story = {
+  name: "with all sections already open",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with all sections already open",
+    )?.options,
+  },
 };

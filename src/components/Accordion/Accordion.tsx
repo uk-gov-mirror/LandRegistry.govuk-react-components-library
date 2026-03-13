@@ -4,7 +4,7 @@ import { ExtractAccordionConfigFromAttributes } from "./Accordion.config";
 
 const Accordion: React.FC<AccordionProps> = ({
   headingLevel: HeadingLevel = "h2",
-  items,
+  items = [],
   className,
   id,
   ...attributes
@@ -32,7 +32,7 @@ const Accordion: React.FC<AccordionProps> = ({
                 className="govuk-accordion__section-button"
                 id={`${id}-heading-${index + 1}`}
               >
-                {item.heading.children}
+                {item.heading?.children}
               </span>
             </HeadingLevel>
             {item.summary && (
@@ -49,7 +49,7 @@ const Accordion: React.FC<AccordionProps> = ({
             className="govuk-accordion__section-content"
             aria-labelledby={`${id}-heading-${index + 1}`}
           >
-            {item.content.children}
+            {item.content?.children}
           </div>
         </div>
       ))}

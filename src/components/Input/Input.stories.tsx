@@ -1,66 +1,169 @@
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/input/fixtures.json
+// Regenerate: npm run generate-stories
+
 import React from "react";
 import "./Input.scss";
 import Input from "./Input";
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import fixtures from "govuk-frontend/dist/govuk/components/input/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-import { WithRef } from "../../utils/WithReference";
-
 const meta: Meta<typeof Input> = {
   title: "GOVUK Design System/Input",
   component: Input,
+  decorators: [
+    (Story) => {
+      return <Story />;
+    },
+  ],
   tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof Input>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const WithHintText = createStory(1);
-export const WithErrorMessage = createStory(2);
-export const WithErrorAndHint = createStory(3);
-export const WithWidth2Class = createStory(4);
-export const WithWidth3Class = createStory(5);
-export const WithWidth4Class = createStory(6);
-export const WithWidth5Class = createStory(7);
-export const WithWidth10Class = createStory(8);
-export const WithWidth20Class = createStory(9);
-export const WithWidth30Class = createStory(10);
-export const WithLabelAsPageHeading = createStory(11);
-export const WithOptionalFormGroupClasses = createStory(12);
-export const WithAutocompleteAttribute = createStory(13);
-export const WithPatternAttribute = createStory(14);
-export const WithSpellcheckEnabled = createStory(15);
-export const WithSpellcheckDisabled = createStory(16);
-export const WithAutocapitalizeTurnedOff = createStory(17);
-export const Disabled = createStory(18);
-export const WithPrefix = createStory(19);
-export const WithSuffix = createStory(20);
-export const WithPrefixAndSuffix = createStory(21);
-export const WithPrefixAndLongSuffix = createStory(22);
-export const WithPrefixAndSuffixAndError = createStory(23);
-export const WithPrefixAndSuffixAndWidthModifier = createStory(24);
-export const WithExtraLetterSpacing = createStory(25);
+export const WithHintText: Story = {
+  name: "with hint text",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hint text")?.options,
+  },
+};
 
-const Template: StoryFn<typeof Input> = (args) => (
-  <WithRef Component={Input} {...args} />
-);
-const example: ComponentFixture = examplesFromFixtures[0];
-export const WithReference = {
-  render: Template,
-  args: { ...example.options },
+export const WithErrorMessage: Story = {
+  name: "with error message",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with error message")
+      ?.options,
+  },
+};
+
+export const WithErrorAndHint: Story = {
+  name: "with error and hint",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with error and hint")
+      ?.options,
+  },
+};
+
+export const WithWidth2Class: Story = {
+  name: "with width-2 class",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with width-2 class")
+      ?.options,
+  },
+};
+
+export const WithWidth3Class: Story = {
+  name: "with width-3 class",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with width-3 class")
+      ?.options,
+  },
+};
+
+export const WithWidth4Class: Story = {
+  name: "with width-4 class",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with width-4 class")
+      ?.options,
+  },
+};
+
+export const WithWidth5Class: Story = {
+  name: "with width-5 class",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with width-5 class")
+      ?.options,
+  },
+};
+
+export const WithWidth10Class: Story = {
+  name: "with width-10 class",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with width-10 class")
+      ?.options,
+  },
+};
+
+export const WithWidth20Class: Story = {
+  name: "with width-20 class",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with width-20 class")
+      ?.options,
+  },
+};
+
+export const WithWidth30Class: Story = {
+  name: "with width-30 class",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with width-30 class")
+      ?.options,
+  },
+};
+
+export const WithLabelAsPageHeading: Story = {
+  name: "with label as page heading",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with label as page heading")
+      ?.options,
+  },
+};
+
+export const WithPrefix: Story = {
+  name: "with prefix",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with prefix")?.options,
+  },
+};
+
+export const WithSuffix: Story = {
+  name: "with suffix",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with suffix")?.options,
+  },
+};
+
+export const WithPrefixAndSuffix: Story = {
+  name: "with prefix and suffix",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with prefix and suffix")
+      ?.options,
+  },
+};
+
+export const WithPrefixAndSuffixAndError: Story = {
+  name: "with prefix and suffix and error",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with prefix and suffix and error",
+    )?.options,
+  },
+};
+
+export const WithPrefixAndSuffixAndWidthModifier: Story = {
+  name: "with prefix and suffix and width modifier",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with prefix and suffix and width modifier",
+    )?.options,
+  },
+};
+
+export const WithExtraLetterSpacing: Story = {
+  name: "with extra letter spacing",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with extra letter spacing")
+      ?.options,
+  },
 };

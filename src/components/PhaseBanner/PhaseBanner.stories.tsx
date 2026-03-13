@@ -1,4 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/phase-banner/fixtures.json
+// Regenerate: npm run generate-stories
+
 import React from "react";
 import "./PhaseBanner.scss";
 import PhaseBanner from "./PhaseBanner";
@@ -6,27 +9,26 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import fixtures from "govuk-frontend/dist/govuk/components/phase-banner/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-
 const meta: Meta<typeof PhaseBanner> = {
-  title: "GOVUK Design System/Phase banner",
+  title: "GOVUK Design System/PhaseBanner",
   component: PhaseBanner,
+  decorators: [
+    (Story) => {
+      return <Story />;
+    },
+  ],
   tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof PhaseBanner>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
-
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);

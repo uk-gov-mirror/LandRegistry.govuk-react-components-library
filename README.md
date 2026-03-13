@@ -39,6 +39,7 @@ The Components includes:
 - [Details](./src/components/Details/Details.tsx)
 - [ErrorMessage](./src/components/ErrorMessage/ErrorMessage.tsx)
 - [ErrorSummary](./src/components/ErrorSummary/ErrorSummary.tsx) `👈🏽`
+- [ExitThisPage](./src/components/ExitThisPage/ExitThisPage.tsx) `👈🏽`
 - [Fieldset](./src/components/Fieldset/Fieldset.tsx)
 - [FileUpload](./src/components/FileUpload/FileUpload.tsx)
 - [Footer](./src/components/Footer/Footer.tsx)
@@ -50,6 +51,7 @@ The Components includes:
 - [NotificationBanner](./src/components/NotificationBanner/NotificationBanner.tsx)
 - [Pagination](./src/components/Pagination/Pagination.tsx)
 - [Panel](./src/components/Panel/Panel.tsx)
+- [PasswordInput](./src/components/PasswordInput/PasswordInput.tsx) `👈🏽`
 - [PhaseBanner](./src/components/PhaseBanner/PhaseBanner.tsx)
 - [Radios](./src/components/Radios/Radios.tsx) `👈🏽`
 - [Select](./src/components/Select/Select.tsx)
@@ -95,8 +97,10 @@ There are some convenience functions that can be used to configure components wi
 - [ConfigureOverallButton](./src/components/Button/Button.config.tsx) - Sets overall behavior and configurations for all button or in a scope (document or specified element) as per [govuk-frontend button api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#button).
 - [ConfigureOverallCheckboxes](./src/components/Checkboxes/Checkboxes.config.tsx) - Sets overall behavior and configurations for all checkboxes or in a scope.
 - [ConfigureOverallErrorSummary](./src/components/ErrorSummary/ErrorSummary.config.tsx) - Sets overall behavior and configurations for all error summary or in a scope (document or specified element) as per [govuk-frontend error-summary api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#errorsummary).
+- [ConfigureExitThisPage](./src/components/ExitThisPage/ExitThisPage.config.ts) - Initialises the Exit This Page component or in a scope (document or specified element) as per [govuk-frontend exit-this-page api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#exit-this-page).
 - [ConfigureOverallHeader](./src/components/Header/Header.config.tsx) - Sets overall behavior and configurations for all Header or in a scope.
 - [ConfigureOverallRadios](./src/components/Radios/Radios.config.tsx) - Sets overall behavior and configurations for all Radios or in a scope.
+- [ConfigurePasswordInput](./src/components/PasswordInput/PasswordInput.config.ts) - Initialises the Password Input show/hide toggle or in a scope (document or specified element) as per [govuk-frontend password-input api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#password-input).
 - [ConfigureOverallSkipLink](./src/components/SkipLink/SkipLink.config.tsx) - Sets overall behavior and configurations for all SkipLink or in a scope.
 - [ConfigureOverallTabs](./src/components/Tabs/Tabs.config.tsx) - Sets overall behavior and configurations for all Tabs or in a scope.
 
@@ -646,6 +650,7 @@ git push --follow-tags origin main
 and publish as an npm package run
 
 ```bash
+npm config set //registry.npmjs.org/:_authToken={$NPM_TOKEN}
 npm publish
 ```
 

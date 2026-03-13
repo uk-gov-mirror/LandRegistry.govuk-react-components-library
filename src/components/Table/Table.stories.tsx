@@ -1,3 +1,7 @@
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/table/fixtures.json
+// Regenerate: npm run generate-stories
+
 import React from "react";
 import "./Table.scss";
 import Table from "./Table";
@@ -5,48 +9,41 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import fixtures from "govuk-frontend/dist/govuk/components/table/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-
 const meta: Meta<typeof Table> = {
   title: "GOVUK Design System/Table",
   component: Table,
+  decorators: [
+    (Story) => {
+      return <Story />;
+    },
+  ],
   tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof Table>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const TableWithHead = createStory(1);
-export const TableWithHeadAndCaption = createStory(2);
-export const WithSmallTextModifierForTablesWithALotOfData = createStory(3);
-export const withEverythingAndFooter: Story = {
+export const WithHead: Story = {
+  name: "with head",
   args: {
-    ...examplesFromFixtures[2]?.options,
-    footer: [
-      {
-        children: <>Total &#8594;</>,
-      },
-      {
-        children: "£325",
-        format: "numeric",
-      },
-      {
-        children: "£275",
-        format: "numeric",
-      },
-    ],
+    ...examplesFromFixtures.find((f) => f.name === "with head")?.options,
+  },
+};
+
+export const WithHeadAndCaption: Story = {
+  name: "with head and caption",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with head and caption")
+      ?.options,
   },
 };

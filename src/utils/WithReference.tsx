@@ -1,11 +1,4 @@
-import React, {
-  useEffect,
-  useRef,
-  FC,
-  createRef,
-  forwardRef,
-  useMemo,
-} from "react";
+import React, { useEffect, useRef, FC, createRef, useMemo } from "react";
 import reactElementToJSXString from "react-element-to-jsx-string";
 import { InfoSectionProps, WithRefProps } from "./WithReference.types";
 
@@ -19,17 +12,10 @@ const WithRef: FC<WithRefProps> = ({ Component, ...restProps }) => {
     }
   }, []);
 
-  // Wrap Component with forwardRef to handle ref forwarding
-  const ForwardedComponent = forwardRef<HTMLElement, unknown>((props, ref) => {
-    return <Component {...props} ref={ref} />;
-  });
-
-  // Set a display name for better debugging
-  ForwardedComponent.displayName = `Forwarded(${Component.displayName || Component.name || "Component"})`;
-
+  // React 19: ref is a regular prop — no forwardRef wrapper needed
   return (
     <>
-      <ForwardedComponent {...restProps} ref={ref} />
+      <Component {...restProps} ref={ref} />
       <InfoSection refName="ref" Component={Component} restProps={restProps} />
     </>
   );
@@ -37,9 +23,8 @@ const WithRef: FC<WithRefProps> = ({ Component, ...restProps }) => {
 
 // Component to handle refs for multiple elements
 const WithItemRefs: FC<WithRefProps> = ({ Component, ...restProps }) => {
-  // Memoize refs to prevent unnecessary recreation
-  const refs: React.RefObject<HTMLElement>[] = useMemo(
-    () => restProps?.items?.map(() => createRef<HTMLElement>()),
+  const refs = useMemo<React.RefObject<HTMLElement | null>[]>(
+    () => restProps?.items?.map(() => createRef<HTMLElement>()) ?? [],
     [restProps.items],
   );
 
@@ -54,8 +39,8 @@ const WithItemRefs: FC<WithRefProps> = ({ Component, ...restProps }) => {
   const modifiedProps = {
     ...restProps,
     items: restProps?.items?.map((item: unknown, index: number) => ({
-      ...item,
-      ref: refs[index], // Attach the corresponding ref
+      ...(item as object),
+      ref: refs[index],
     })),
   };
 

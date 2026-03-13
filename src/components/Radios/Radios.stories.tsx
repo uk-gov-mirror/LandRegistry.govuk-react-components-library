@@ -1,92 +1,180 @@
-import React, { useEffect } from "react";
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/radios/fixtures.json
+// Regenerate: npm run generate-stories
+
+import React from "react";
 import "./Radios.scss";
 import Radios from "./Radios";
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import fixtures from "govuk-frontend/dist/govuk/components/radios/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-import { WithItemRefs } from "../../utils/WithReference";
-import { ConfigureOverallRadios } from "./Radios.config";
-import { action } from "storybook/actions";
-
 const meta: Meta<typeof Radios> = {
   title: "GOVUK Design System/Radios",
   component: Radios,
   decorators: [
     (Story) => {
-      useEffect(() => {
-        // Remove any existing initialization before configuring
-        const radios = document.querySelectorAll(".govuk-radios");
-        radios.forEach((radio) => {
-          radio.removeAttribute("data-module");
-        });
-
-        // Initialize once
-        ConfigureOverallRadios();
-      }, []);
       return <Story />;
     },
   ],
-  parameters: {
-    initializeConfigurations: true,
-  },
-  args: {
-    onChange: action("on-change"),
-    onBlur: action("on-blur"),
-  },
+  tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof Radios>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const Inline = createStory(1);
-export const WithDisabled = createStory(2);
-export const WithLegendAsPageHeading = createStory(3);
-export const WithAMediumLegend = createStory(4);
-export const WithADivider = createStory(5);
-export const WithHintsOnItems = createStory(6);
-export const WithoutFieldset = createStory(7);
-export const WithFieldsetAndErrorMessage = createStory(8);
-export const WithVeryLongOptionText = createStory(9);
-export const WithConditionalItems = createStory(10);
-export const WithConditionalItemsWithSpecialCharacters = createStory(11);
-export const WithConditionalItemChecked = createStory(12);
-export const Prechecked = createStory(13);
-export const PrecheckedUsingValue = createStory(14);
-export const WithConditionalItemsAndPreCheckedValue = createStory(15);
-export const WithOptionalFormGroupClassesShowingGroupError = createStory(16);
-export const Small = createStory(17);
-export const SmallWithLongText = createStory(18);
-export const SmallWithError = createStory(19);
-export const SmallWithHint = createStory(20);
-export const SmallWithDisabled = createStory(21);
-export const SmallWithConditionalReveal = createStory(22);
-export const SmallInline = createStory(23);
-export const SmallInlineExtreme = createStory(24);
-export const SmallWithADivider = createStory(25);
-export const WithIdprefix = createStory(26);
+export const WithHint: Story = {
+  name: "with hint",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hint")?.options,
+  },
+};
 
-// Template for WithReference Story
-const Template: StoryFn<typeof Radios> = (args) => (
-  <WithItemRefs Component={Radios} {...args} />
-);
+export const Inline: Story = {
+  name: "inline",
+  args: { ...examplesFromFixtures.find((f) => f.name === "inline")?.options },
+};
 
-export const WithReference = {
-  render: Template,
-  args: { ...examplesFromFixtures[0].options },
-  parameters: { initializeConfigurations: true },
+export const WithLegendAsPageHeading: Story = {
+  name: "with legend as page heading",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with legend as page heading",
+    )?.options,
+  },
+};
+
+export const WithADivider: Story = {
+  name: "with a divider",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with a divider")?.options,
+  },
+};
+
+export const WithHintsOnItems: Story = {
+  name: "with hints on items",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hints on items")
+      ?.options,
+  },
+};
+
+export const WithoutFieldset: Story = {
+  name: "without fieldset",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "without fieldset")?.options,
+  },
+};
+
+export const WithFieldsetAndErrorMessage: Story = {
+  name: "with fieldset and error message",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with fieldset and error message",
+    )?.options,
+  },
+};
+
+export const WithVeryLongOptionText: Story = {
+  name: "with very long option text",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with very long option text")
+      ?.options,
+  },
+};
+
+export const WithConditionalItems: Story = {
+  name: "with conditional items",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with conditional items")
+      ?.options,
+  },
+};
+
+export const WithConditionalItemChecked: Story = {
+  name: "with conditional item checked",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with conditional item checked",
+    )?.options,
+  },
+};
+
+export const WithOptionalFormGroupClassesShowingGroupError: Story = {
+  name: "with optional form-group classes showing group error",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with optional form-group classes showing group error",
+    )?.options,
+  },
+};
+
+export const Small: Story = {
+  name: "small",
+  args: { ...examplesFromFixtures.find((f) => f.name === "small")?.options },
+};
+
+export const SmallWithLongText: Story = {
+  name: "small with long text",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "small with long text")
+      ?.options,
+  },
+};
+
+export const SmallWithError: Story = {
+  name: "small with error",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "small with error")?.options,
+  },
+};
+
+export const SmallWithHint: Story = {
+  name: "small with hint",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "small with hint")?.options,
+  },
+};
+
+export const SmallWithConditionalReveal: Story = {
+  name: "small with conditional reveal",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "small with conditional reveal",
+    )?.options,
+  },
+};
+
+export const SmallInline: Story = {
+  name: "small inline",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "small inline")?.options,
+  },
+};
+
+export const SmallWithADivider: Story = {
+  name: "small with a divider",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "small with a divider")
+      ?.options,
+  },
+};
+
+export const WithConditionalItemsAndPreCheckedValue: Story = {
+  name: "with conditional items and pre-checked value",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with conditional items and pre-checked value",
+    )?.options,
+  },
 };
