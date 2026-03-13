@@ -205,24 +205,24 @@
 .loading-wheel-2 {
   width: 1em;
   height: 1em;
-  border-radius: 50%;
   margin: 40px;
-  animation: loading-frames 1.1s infinite ease;
   font-size: 8px;
   text-indent: -9999em;
+  border-radius: 50%;
   transform: translateZ(0);
+  animation: loading-frames 1.1s infinite ease;
 }
 
 .loading-wheel {
   width: 1em;
   height: 1em;
-  border-radius: 50%;
   margin: 40px;
   margin-left: 25px;
-  animation: loading-frames 1.1s infinite ease;
   font-size: 8px;
   text-indent: -9999em;
+  border-radius: 50%;
   transform: translateZ(0);
+  animation: loading-frames 1.1s infinite ease;
 }
 
 .head-space {
