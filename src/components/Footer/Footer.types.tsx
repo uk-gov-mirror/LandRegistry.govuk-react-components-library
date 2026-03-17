@@ -29,9 +29,17 @@ export interface Meta {
   children?: React.ReactNode;
 }
 
+export interface ContentLicence {
+  className?: string;
+  children: React.ReactNode;
+  reactListKey?: string | number;
+  [key: string]: unknown;
+}
+
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
   className?: string;
   containerClassName?: string;
   meta?: Meta;
   navigation?: NavigationItem[];
+  contentLicence?: ContentLicence;
 }

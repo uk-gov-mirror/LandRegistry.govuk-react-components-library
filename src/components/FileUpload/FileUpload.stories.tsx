@@ -5,7 +5,7 @@
 import React from "react";
 import "./FileUpload.scss";
 import FileUpload from "./FileUpload";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/file-upload/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";

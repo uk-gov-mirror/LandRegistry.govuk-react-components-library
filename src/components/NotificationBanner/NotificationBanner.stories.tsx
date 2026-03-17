@@ -5,14 +5,26 @@
 import React from "react";
 import "./NotificationBanner.scss";
 import NotificationBanner from "./NotificationBanner";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/notification-banner/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallNotificationBanner } from "./NotificationBanner.config";
+
+let configured = false;
 const meta: Meta<typeof NotificationBanner> = {
   title: "GOVUK Design System/NotificationBanner",
   component: NotificationBanner,
-  decorators: [(Story) => {
+  decorators: [(Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-notification-banner--docs");
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallNotificationBanner();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallNotificationBanner();
+        }
+      }, []);
       return <Story />;
     }],
   tags: ["autodocs"],

@@ -44,8 +44,28 @@ const config: StorybookConfig = {
             test: /\.s[ac]ss$/i,
             use: [
               "style-loader",
-              "css-loader",
-              { loader: "sass-loader", options: { implementation: sass } },
+              {
+                loader: "css-loader",
+                options: {
+                  url: false, // stops css-loader trying to resolve /assets/fonts/... as modules
+                },
+              },
+              {
+                loader: "sass-loader",
+                options: {
+                  implementation: sass,
+                  sassOptions: {
+                    quietDeps: true, // suppresses variable conflict from @use ... as *
+                    silenceDeprecations: [
+                      "import",
+                      "global-builtin",
+                      "color-functions",
+                      "if-function",
+                    ],
+                  },
+                  // NO additionalData — that's what's causing the duplicate $govuk-assets-path error
+                },
+              },
             ],
           },
         ],
@@ -90,7 +110,13 @@ const config: StorybookConfig = {
   },
   docs: {},
   typescript: { reactDocgen: "react-docgen-typescript" },
-  staticDirs: ["./public"],
+  staticDirs: [
+    "./public",
+    {
+      from: "../node_modules/govuk-frontend/dist/govuk/assets",
+      to: "/assets",
+    },
+  ],
 };
 
 export default config;

@@ -5,14 +5,26 @@
 import React from "react";
 import "./PasswordInput.scss";
 import PasswordInput from "./PasswordInput";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/password-input/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallPasswordInput } from "./PasswordInput.config";
+
+let configured = false;
 const meta: Meta<typeof PasswordInput> = {
   title: "GOVUK Design System/PasswordInput",
   component: PasswordInput,
-  decorators: [(Story) => {
+  decorators: [(Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-password-input--docs");
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallPasswordInput();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallPasswordInput();
+        }
+      }, []);
       return <Story />;
     }],
   tags: ["autodocs"],

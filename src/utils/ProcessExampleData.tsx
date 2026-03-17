@@ -133,6 +133,7 @@ function processComponentSpecificData(
   componentName: string,
 ) {
   if (componentName === "radios" && key === "items" && isArray(value)) {
+    value.forEach((item) => processComponentData(item, componentName));
     const checked = value.find(
       (item): item is DataRecord => isRecord(item) && Boolean(item.checked),
     );

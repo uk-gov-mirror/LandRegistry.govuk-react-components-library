@@ -5,14 +5,26 @@
 import React from "react";
 import "./Header.scss";
 import Header from "./Header";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/header/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallHeader } from "./Header.config";
+
+let configured = false;
 const meta: Meta<typeof Header> = {
   title: "GOVUK Design System/Header",
   component: Header,
-  decorators: [(Story) => {
+  decorators: [(Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-header--docs");
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallHeader();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallHeader();
+        }
+      }, []);
       return <Story />;
     }],
   tags: ["autodocs"],

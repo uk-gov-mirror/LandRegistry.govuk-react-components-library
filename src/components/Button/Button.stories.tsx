@@ -5,14 +5,26 @@
 import React from "react";
 import "./Button.scss";
 import Button from "./Button";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/button/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallButton } from "./Button.config";
+
+let configured = false;
 const meta: Meta<typeof Button> = {
   title: "GOVUK Design System/Button",
   component: Button,
-  decorators: [(Story) => {
+  decorators: [(Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-button--docs");
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallButton();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallButton();
+        }
+      }, []);
       return <Story />;
     }],
   tags: ["autodocs"],

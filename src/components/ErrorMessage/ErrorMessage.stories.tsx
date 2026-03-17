@@ -5,7 +5,7 @@
 import React from "react";
 import "./ErrorMessage.scss";
 import ErrorMessage from "./ErrorMessage";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/error-message/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";

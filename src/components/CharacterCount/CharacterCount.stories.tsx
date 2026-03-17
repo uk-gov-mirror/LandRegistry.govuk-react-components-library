@@ -5,14 +5,26 @@
 import React from "react";
 import "./CharacterCount.scss";
 import CharacterCount from "./CharacterCount";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/character-count/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallCharacterCount } from "./CharacterCount.config";
+
+let configured = false;
 const meta: Meta<typeof CharacterCount> = {
   title: "GOVUK Design System/CharacterCount",
   component: CharacterCount,
-  decorators: [(Story) => {
+  decorators: [(Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-character-count--docs");
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallCharacterCount();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallCharacterCount();
+        }
+      }, []);
       return <Story />;
     }],
   tags: ["autodocs"],

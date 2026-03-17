@@ -3,5 +3,5 @@ $govuk-fonts-path: "~govuk-frontend/dist/govuk/assets/fonts/";
 $govuk-assets-path: "~govuk-frontend/dist/govuk/assets/";
 $govuk-font-family: "Arial", sans-serif;
 
-@use "~govuk-frontend/dist/govuk/base" as *;
-@use "~govuk-frontend/dist/govuk/components/radios" as *;
+@use "~govuk-frontend/dist/govuk/base";
+@use "~govuk-frontend/dist/govuk/components/radios";

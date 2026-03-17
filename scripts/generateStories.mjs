@@ -12,6 +12,12 @@
  * Usage:
  *   node scripts/generateStories.mjs
  *   node scripts/generateStories.mjs --component=Accordion
+ *   node scripts/generateStories.mjs --framework=react-webpack5
+ *   node scripts/generateStories.mjs --framework=react-vite
+ *
+ * The --framework flag overrides auto-detection from package.json.
+ * Auto-detection checks devDependencies for @storybook/react-webpack5
+ * or @storybook/react-vite and picks whichever is present.
  *
  * Add to package.json:
  *   "generate-stories":    "node scripts/generateStories.mjs",
@@ -36,6 +42,34 @@ const GOVUK_FIXTURES_BASE = path.join(
 );
 
 // ---------------------------------------------------------------------------
+// Storybook framework detection
+//
+// Determines which @storybook package to import Meta/StoryObj from.
+// Override by passing --framework=react-webpack5 or --framework=react-vite.
+// If not specified, auto-detects from the installed packages.
+// ---------------------------------------------------------------------------
+function detectStorybookFramework() {
+  const frameworkArg = process.argv.find((a) => a.startsWith("--framework="));
+  if (frameworkArg) return frameworkArg.split("=")[1];
+
+  const pkgPath = path.join(ROOT, "package.json");
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
+  const allDeps = {
+    ...pkg.dependencies,
+    ...pkg.devDependencies,
+    ...pkg.peerDependencies,
+  };
+
+  if (allDeps["@storybook/react-webpack5"]) return "react-webpack5";
+  if (allDeps["@storybook/react-vite"]) return "react-vite";
+
+  // fallback
+  return "react-webpack5";
+}
+
+const STORYBOOK_FRAMEWORK = detectStorybookFramework();
+
+// ---------------------------------------------------------------------------
 // Fixture name overrides
 //
 // By default the script converts a component folder name to kebab-case and
@@ -54,27 +88,80 @@ const FIXTURE_NAME_OVERRIDES = {
 // ---------------------------------------------------------------------------
 // Per-component customisation
 //
-// Only add an entry here if the component needs extra imports, setup, or a
-// custom decorator beyond the default `return <Story />;`.
+// Components whose folder contains a {Component}.config.ts[x] file receive a
+// standard configuration decorator automatically — no entry needed here.
+//
+// Only add an entry here if a component needs something beyond the standard
+// config-file decorator (e.g. completely different decorator logic, additional
+// imports on top of the config import, etc.).  Entries here are deep-merged
+// with — and take precedence over — the auto-generated config.
 // ---------------------------------------------------------------------------
-const CUSTOM_CONFIG = {
-  Accordion: {
-    extraImports: `import { ConfigureOverallAccordion } from "./Accordion.config";`,
+const CUSTOM_CONFIG = {};
+
+// ---------------------------------------------------------------------------
+// Config-file auto-detection
+//
+// If a component folder contains {Component}.config.ts or .config.tsx the
+// generator injects:
+//   • an import for the Configure function
+//   • a `let configured = false` guard (prevents double-init in docs mode)
+//   • a decorator that calls the function on every story render, but only
+//     once per page-load when Storybook is showing the auto-docs page.
+//
+// The docs-mode URL pattern changed in Storybook 8:
+//   old: ?viewMode=docs
+//   new: ?path=/docs/govuk-design-system-{kebab}--docs
+// ---------------------------------------------------------------------------
+
+/** Returns true when the component folder has a .config.ts or .config.tsx file. */
+function hasConfigFile(componentName) {
+  const dir = path.join(COMPONENTS_DIR, componentName);
+  return (
+    fs.existsSync(path.join(dir, `${componentName}.config.ts`)) ||
+    fs.existsSync(path.join(dir, `${componentName}.config.tsx`))
+  );
+}
+
+/**
+ * Builds the standard CUSTOM_CONFIG-shaped object for any component that has
+ * a config file.  The caller can then merge this with an explicit CUSTOM_CONFIG
+ * entry when one exists.
+ */
+function buildConfigFileCustomisation(componentName) {
+  const kebab = resolveFixtureName(componentName);
+  const fnName = `ConfigureOverall${componentName}`;
+  const docsPath = `path=/docs/govuk-design-system-${kebab}--docs`;
+
+  return {
+    extraImports: `import { ${fnName} } from "./${componentName}.config";`,
     extraSetup: `\nlet configured = false;`,
     decorator: `(Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes("viewMode=docs");
+        const isDocsMode = window.location.search.includes("${docsPath}");
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallAccordion();
+          ${fnName}();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallAccordion();
+          ${fnName}();
         }
       }, []);
       return <Story />;
     }`,
-  },
-};
+  };
+}
+
+/** Returns the resolved customisation for a component (auto + manual merged). */
+function resolveCustomConfig(componentName) {
+  const auto = hasConfigFile(componentName)
+    ? buildConfigFileCustomisation(componentName)
+    : null;
+  const manual = CUSTOM_CONFIG[componentName] ?? null;
+
+  if (!auto && !manual) return null;
+  // Manual entries win — they can override individual keys (e.g. decorator)
+  // while still inheriting auto-generated imports/setup when not specified.
+  return { ...auto, ...manual };
+}
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -146,7 +233,7 @@ function getAllGovukComponents() {
 // ---------------------------------------------------------------------------
 function generateFile(componentName, visibleFixtures) {
   const fixtureName = resolveFixtureName(componentName);
-  const custom = CUSTOM_CONFIG[componentName];
+  const custom = resolveCustomConfig(componentName);
   const hasScss = fs.existsSync(
     path.join(COMPONENTS_DIR, componentName, `${componentName}.scss`),
   );
@@ -180,7 +267,7 @@ function generateFile(componentName, visibleFixtures) {
     `import React from "react";`,
     hasScss ? `import "./${componentName}.scss";` : null,
     `import ${componentName} from "./${componentName}";`,
-    `import { Meta, StoryObj } from "@storybook/react-vite";`,
+    `import { Meta, StoryObj } from "@storybook/${STORYBOOK_FRAMEWORK}";`,
     `import fixtures from "govuk-frontend/dist/govuk/components/${fixtureName}/fixtures.json";`,
     `import { extractShownFixtures } from "../../utils/ProcessExampleData";`,
     `import { ComponentFixture } from "../../dynamics";`,
@@ -259,6 +346,7 @@ for (const componentName of srcComponentNames) {
 // Report
 // ---------------------------------------------------------------------------
 console.log("\n📖 Story generation report\n");
+console.log(`   Storybook framework: @storybook/${STORYBOOK_FRAMEWORK}`);
 
 if (results.generated.length) {
   console.log("✅ Generated:");

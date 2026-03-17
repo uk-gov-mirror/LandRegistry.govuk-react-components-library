@@ -5,14 +5,26 @@
 import React from "react";
 import "./ExitThisPage.scss";
 import ExitThisPage from "./ExitThisPage";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/exit-this-page/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallExitThisPage } from "./ExitThisPage.config";
+
+let configured = false;
 const meta: Meta<typeof ExitThisPage> = {
   title: "GOVUK Design System/ExitThisPage",
   component: ExitThisPage,
-  decorators: [(Story) => {
+  decorators: [(Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-exit-this-page--docs");
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallExitThisPage();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallExitThisPage();
+        }
+      }, []);
       return <Story />;
     }],
   tags: ["autodocs"],
