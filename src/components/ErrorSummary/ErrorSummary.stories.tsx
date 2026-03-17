@@ -5,15 +5,29 @@
 import React from "react";
 import "./ErrorSummary.scss";
 import ErrorSummary from "./ErrorSummary";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/error-summary/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallErrorSummary } from "./ErrorSummary.config";
+
+let configured = false;
 const meta: Meta<typeof ErrorSummary> = {
-  title: "GOVUK Design System/ErrorSummary",
+  title: "GOVUK Design System/Error summary",
   component: ErrorSummary,
   decorators: [
-    (Story) => {
+    (Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-error-summary--docs",
+        );
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallErrorSummary();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallErrorSummary();
+        }
+      }, []);
       return <Story />;
     },
   ],

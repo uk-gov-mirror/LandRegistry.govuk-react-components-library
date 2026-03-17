@@ -5,12 +5,12 @@
 import React from "react";
 import "./FileUpload.scss";
 import FileUpload from "./FileUpload";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/file-upload/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof FileUpload> = {
-  title: "GOVUK Design System/FileUpload",
+  title: "GOVUK Design System/File upload",
   component: FileUpload,
   decorators: [
     (Story) => {

@@ -5,12 +5,12 @@
 import React from "react";
 import "./PhaseBanner.scss";
 import PhaseBanner from "./PhaseBanner";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/phase-banner/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof PhaseBanner> = {
-  title: "GOVUK Design System/PhaseBanner",
+  title: "GOVUK Design System/Phase banner",
   component: PhaseBanner,
   decorators: [
     (Story) => {

@@ -5,7 +5,7 @@
 import React from "react";
 import "./Accordion.scss";
 import Accordion from "./Accordion";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/accordion/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -18,7 +18,9 @@ const meta: Meta<typeof Accordion> = {
   decorators: [
     (Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes("viewMode=docs");
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-accordion--docs",
+        );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallAccordion();
           configured = true;

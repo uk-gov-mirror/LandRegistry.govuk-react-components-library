@@ -5,12 +5,12 @@
 import React from "react";
 import "./TaskList.scss";
 import TaskList from "./TaskList";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/task-list/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof TaskList> = {
-  title: "GOVUK Design System/TaskList",
+  title: "GOVUK Design System/Task list",
   component: TaskList,
   decorators: [
     (Story) => {

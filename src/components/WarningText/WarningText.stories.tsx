@@ -5,12 +5,12 @@
 import React from "react";
 import "./WarningText.scss";
 import WarningText from "./WarningText";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/warning-text/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof WarningText> = {
-  title: "GOVUK Design System/WarningText",
+  title: "GOVUK Design System/Warning text",
   component: WarningText,
   decorators: [
     (Story) => {

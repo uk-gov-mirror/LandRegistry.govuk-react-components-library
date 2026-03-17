@@ -5,15 +5,29 @@
 import React from "react";
 import "./Tabs.scss";
 import Tabs from "./Tabs";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/tabs/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallTabs } from "./Tabs.config";
+
+let configured = false;
 const meta: Meta<typeof Tabs> = {
   title: "GOVUK Design System/Tabs",
   component: Tabs,
   decorators: [
-    (Story) => {
+    (Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-tabs--docs",
+        );
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallTabs();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallTabs();
+        }
+      }, []);
       return <Story />;
     },
   ],

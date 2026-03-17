@@ -5,12 +5,12 @@
 import React from "react";
 import "./CookieBanner.scss";
 import CookieBanner from "./CookieBanner";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/cookie-banner/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof CookieBanner> = {
-  title: "GOVUK Design System/CookieBanner",
+  title: "GOVUK Design System/Cookie banner",
   component: CookieBanner,
   decorators: [
     (Story) => {

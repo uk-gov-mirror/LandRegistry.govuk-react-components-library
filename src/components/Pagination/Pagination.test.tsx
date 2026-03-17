@@ -1,268 +1,305 @@
 import React from "react";
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
-import { expect, describe, test, jest, afterEach } from "@jest/globals";
+import { render, screen, cleanup } from "@testing-library/react";
+import { expect, describe, test, afterEach } from "@jest/globals";
 import Pagination from "./Pagination";
+import { PaginationItemProps } from "./Pagination.types";
 
-const onPageChange = jest.fn();
-const PageBatchSize = 150;
-const PageSize = 25;
-const paginationRange = [1, 2, 3, 4, 5, 6];
+// ---------------------------------------------------------------------------
+// Fixtures
+// ---------------------------------------------------------------------------
+
+/** Builds a sequential items array for pages 1..n with the given page current. */
+function makeItems(
+  totalPages: number,
+  currentPage: number,
+): PaginationItemProps[] {
+  return Array.from({ length: totalPages }, (_, i) => ({
+    number: i + 1,
+    href: `/page/${i + 1}`,
+    current: i + 1 === currentPage,
+  }));
+}
+
+// const SIX_PAGE_ITEMS = makeItems(6, 1); // overridden per test below
 
 describe("Pagination component", () => {
   afterEach(() => {
     cleanup();
   });
-  test("should render basic Pagination properly and content is on first page", async () => {
-    render(
-      <>
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={1}
-          totalCount={PageBatchSize}
-          pageSize={PageSize}
-        />
-      </>,
+
+  // -------------------------------------------------------------------------
+  // Rendering — first / middle / last page
+  // -------------------------------------------------------------------------
+
+  test("renders all page links on the first page with no previous link", () => {
+    render(<Pagination next={{ href: "/page/2" }} items={makeItems(6, 1)} />);
+
+    // All six page links present
+    [1, 2, 3, 4, 5, 6].forEach((n) =>
+      expect(
+        screen.getByRole("link", { name: `Page ${n}` }),
+      ).toBeInTheDocument(),
     );
 
-    await screen.findByText("Previous");
-    const nextNavigation = screen.getByRole("link", { name: "Next" });
-    fireEvent.click(nextNavigation);
-    expect(onPageChange).toHaveBeenCalledWith(2);
-    paginationRange.forEach((value) => {
-      expect(
-        screen.getByRole("link", { name: `Page ${value}` }),
-      ).toBeInTheDocument();
-    });
-    expect(screen.queryByRole("link", { name: "Previous" })).toBeFalsy();
+    // Next link present, previous absent
+    expect(screen.getByRole("link", { name: /next/i })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /previous/i })).toBeNull();
   });
 
-  test("should render basic Pagination properly and content is on 3rd page", async () => {
+  test("renders all page links on a middle page with both previous and next links", () => {
     render(
-      <>
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={3}
-          totalCount={PageBatchSize}
-          pageSize={PageSize}
-        />
-      </>,
+      <Pagination
+        previous={{ href: "/page/2" }}
+        next={{ href: "/page/4" }}
+        items={makeItems(6, 3)}
+      />,
     );
 
-    await screen.findByText("Previous");
-    const nextNavigation = screen.getByRole("link", { name: "Next" });
-    fireEvent.click(nextNavigation);
-    expect(onPageChange).toHaveBeenCalledWith(2);
-    paginationRange.forEach((value) => {
+    [1, 2, 3, 4, 5, 6].forEach((n) =>
       expect(
-        screen.getByRole("link", { name: `Page ${value}` }),
-      ).toBeInTheDocument();
-    });
-    expect(screen.queryByRole("link", { name: "Previous" })).toBeTruthy();
+        screen.getByRole("link", { name: `Page ${n}` }),
+      ).toBeInTheDocument(),
+    );
+
+    expect(screen.getByRole("link", { name: /previous/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /next/i })).toBeInTheDocument();
   });
 
-  test("should render basic Pagination properly and content is on last page", async () => {
+  test("renders all page links on the last page with no next link", () => {
     render(
-      <>
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={6}
-          totalCount={PageBatchSize}
-          pageSize={PageSize}
-        />
-      </>,
+      <Pagination previous={{ href: "/page/5" }} items={makeItems(6, 6)} />,
     );
 
-    await screen.findByText("Previous");
-    expect(screen.queryByRole("link", { name: "Previous" })).toBeTruthy();
-    expect(screen.queryByRole("link", { name: "Next" })).toBeFalsy();
-    paginationRange.forEach((value) => {
+    [1, 2, 3, 4, 5, 6].forEach((n) =>
       expect(
-        screen.getByRole("link", { name: `Page ${value}` }),
-      ).toBeInTheDocument();
-    });
-  });
-  test("should not render Pagination if total is lesser than page count", async () => {
-    render(
-      <>
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={1}
-          totalCount={PageBatchSize}
-          pageSize={200}
-        />
-      </>,
+        screen.getByRole("link", { name: `Page ${n}` }),
+      ).toBeInTheDocument(),
     );
 
-    expect(screen.queryByText("Previous")).toBeFalsy();
-    expect(screen.queryByText("Next")).toBeFalsy();
+    expect(screen.getByRole("link", { name: /previous/i })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /next/i })).toBeNull();
   });
 
-  test("should render the new previous name is changed to `Back` ", async () => {
-    render(
-      <>
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={1}
-          totalCount={PageBatchSize}
-          pageSize={PageSize}
-          previousName="Back"
-        />
-      </>,
-    );
-
-    await screen.findByText("Back");
-    const nextNavigation = screen.getByRole("link", { name: "Next" });
-    fireEvent.click(nextNavigation);
-    expect(onPageChange).toHaveBeenCalledWith(2);
-    paginationRange.forEach((value) => {
-      expect(
-        screen.getByRole("link", { name: `Page ${value}` }),
-      ).toBeInTheDocument();
-    });
-    expect(screen.queryByRole("link", { name: "Back" })).toBeFalsy();
+  test("renders nothing when no props are provided", () => {
+    const { container } = render(<Pagination />);
+    expect(container.firstChild).toBeNull();
   });
 
-  test("should render the new next name is changed to `Forward`", async () => {
+  // -------------------------------------------------------------------------
+  // Navigation hrefs
+  // -------------------------------------------------------------------------
+
+  test("previous link points to the correct href", () => {
     render(
-      <>
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={6}
-          totalCount={PageBatchSize}
-          pageSize={PageSize}
-          nextName="Forward"
-        />
-      </>,
+      <Pagination
+        previous={{ href: "/page/2" }}
+        next={{ href: "/page/4" }}
+        items={makeItems(6, 3)}
+      />,
     );
 
-    await screen.findByText("Previous");
-    expect(screen.queryByRole("link", { name: "Previous" })).toBeTruthy();
-    expect(screen.queryByRole("link", { name: "Forward" })).toBeFalsy();
-    paginationRange.forEach((value) => {
-      expect(
-        screen.getByRole("link", { name: `Page ${value}` }),
-      ).toBeInTheDocument();
-    });
+    expect(screen.getByRole("link", { name: /previous/i })).toHaveAttribute(
+      "href",
+      "/page/2",
+    );
   });
 
-  test("should render if the new previous name is changed to `Back` and previous children is provided", async () => {
+  test("next link points to the correct href", () => {
     render(
-      <>
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={1}
-          totalCount={PageBatchSize}
-          pageSize={PageSize}
-          previousName="Back"
-          previousChildren={
-            <span className="govuk-pagination__link-label">
-              Applying for a provisional lorry or bus licence
-            </span>
-          }
-        />
-      </>,
+      <Pagination
+        previous={{ href: "/page/2" }}
+        next={{ href: "/page/4" }}
+        items={makeItems(6, 3)}
+      />,
     );
 
-    await screen.findByText("Back");
-    const nextNavigation = screen.getByRole("link", { name: "Next" });
-    fireEvent.click(nextNavigation);
-    expect(onPageChange).toHaveBeenCalledWith(2);
-    paginationRange.forEach((value) => {
-      expect(
-        screen.getByRole("link", { name: `Page ${value}` }),
-      ).toBeInTheDocument();
-    });
-    expect(screen.queryByRole("link", { name: "Back" })).toBeFalsy();
+    expect(screen.getByRole("link", { name: /next/i })).toHaveAttribute(
+      "href",
+      "/page/4",
+    );
+  });
+
+  test("page item links point to the correct hrefs", () => {
+    render(<Pagination next={{ href: "/page/2" }} items={makeItems(3, 1)} />);
+
+    [1, 2, 3].forEach((n) =>
+      expect(screen.getByRole("link", { name: `Page ${n}` })).toHaveAttribute(
+        "href",
+        `/page/${n}`,
+      ),
+    );
+  });
+
+  // -------------------------------------------------------------------------
+  // Current page
+  // -------------------------------------------------------------------------
+
+  test("marks the current page item with aria-current=page", () => {
+    render(
+      <Pagination
+        previous={{ href: "/page/1" }}
+        next={{ href: "/page/3" }}
+        items={makeItems(3, 2)}
+      />,
+    );
+
+    expect(screen.getByRole("link", { name: "Page 2" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(screen.getByRole("link", { name: "Page 1" })).not.toHaveAttribute(
+      "aria-current",
+    );
+  });
+
+  // -------------------------------------------------------------------------
+  // Ellipsis
+  // -------------------------------------------------------------------------
+
+  test("renders ellipsis items", () => {
+    render(
+      <Pagination
+        previous={{ href: "/page/9" }}
+        next={{ href: "/page/11" }}
+        items={[
+          { number: 1, href: "/page/1" },
+          { ellipsis: true },
+          { number: 9, href: "/page/9" },
+          { number: 10, href: "/page/10", current: true },
+          { number: 11, href: "/page/11" },
+          { ellipsis: true },
+          { number: 40, href: "/page/40" },
+        ]}
+      />,
+    );
+
+    expect(screen.getAllByText("...")).toHaveLength(2);
+  });
+
+  // -------------------------------------------------------------------------
+  // Custom previous / next text (children)
+  // -------------------------------------------------------------------------
+
+  test("renders custom previous text via previous.children", () => {
+    render(
+      <Pagination
+        previous={{ href: "/page/2", children: "Back" }}
+        next={{ href: "/page/4" }}
+        items={makeItems(6, 3)}
+      />,
+    );
+
+    expect(screen.getByRole("link", { name: /back/i })).toBeInTheDocument();
+  });
+
+  test("renders custom next text via next.children", () => {
+    render(
+      <Pagination
+        previous={{ href: "/page/2" }}
+        next={{ href: "/page/4", children: "Forward" }}
+        items={makeItems(6, 3)}
+      />,
+    );
+
+    expect(screen.getByRole("link", { name: /forward/i })).toBeInTheDocument();
+  });
+
+  // -------------------------------------------------------------------------
+  // Label text (block layout)
+  // -------------------------------------------------------------------------
+
+  test("renders previous labelText", () => {
+    render(
+      <Pagination
+        previous={{
+          href: "/page/1",
+          labelText: "Applying for a provisional lorry or bus licence",
+        }}
+        next={{ href: "/page/3" }}
+      />,
+    );
+
     expect(
       screen.getByText("Applying for a provisional lorry or bus licence"),
     ).toBeInTheDocument();
   });
 
-  test("should render if the new next name is changed to `Forward` and next children is provided", async () => {
+  test("renders next labelText", () => {
     render(
-      <>
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={6}
-          totalCount={PageBatchSize}
-          pageSize={PageSize}
-          nextName="Forward"
-          nextChildren={
-            <span className="govuk-pagination__link-label">
-              Driver CPC part 1 test: theory
-            </span>
-          }
-        />
-      </>,
+      <Pagination
+        previous={{ href: "/page/1" }}
+        next={{
+          href: "/page/3",
+          labelText: "Driver CPC part 1 test: theory",
+        }}
+      />,
     );
 
-    await screen.findByText("Previous");
-    expect(screen.queryByRole("link", { name: "Previous" })).toBeTruthy();
-    expect(screen.queryByRole("link", { name: "Forward" })).toBeFalsy();
-    paginationRange.forEach((value) => {
-      expect(
-        screen.getByRole("link", { name: `Page ${value}` }),
-      ).toBeInTheDocument();
-    });
     expect(
       screen.getByText("Driver CPC part 1 test: theory"),
     ).toBeInTheDocument();
   });
 
-  const setup = (props = {}) => {
-    const defaultProps = {
-      onPageChange: jest.fn(),
-      totalCount: 100,
-      siblingCount: 1,
-      currentPage: 1,
-      pageSize: 10,
-      ...props,
-    };
-    return render(<Pagination {...defaultProps} />);
-  };
+  // -------------------------------------------------------------------------
+  // Block layout
+  // -------------------------------------------------------------------------
 
-  test("renders without crashing", () => {
-    setup();
+  test("applies govuk-pagination--block when no items are passed", () => {
+    render(
+      <Pagination previous={{ href: "/page/1" }} next={{ href: "/page/3" }} />,
+    );
+
+    expect(screen.getByRole("navigation")).toHaveClass(
+      "govuk-pagination--block",
+    );
+  });
+
+  test("does not apply govuk-pagination--block when items are present", () => {
+    render(
+      <Pagination
+        previous={{ href: "/page/1" }}
+        next={{ href: "/page/3" }}
+        items={makeItems(3, 2)}
+      />,
+    );
+
+    expect(screen.getByRole("navigation")).not.toHaveClass(
+      "govuk-pagination--block",
+    );
+  });
+
+  // -------------------------------------------------------------------------
+  // Accessibility
+  // -------------------------------------------------------------------------
+
+  test("navigation landmark has accessible label", () => {
+    render(<Pagination next={{ href: "/page/2" }} items={makeItems(3, 1)} />);
+
     expect(
       screen.getByRole("navigation", { name: /pagination/i }),
     ).toBeInTheDocument();
   });
 
-  test("calls onPageChange when next button is clicked", () => {
-    const onPageChange = jest.fn();
-    setup({ currentPage: 1, onPageChange });
+  test("renders visually hidden page text inside prev and next links", () => {
+    render(
+      <Pagination
+        previous={{ href: "/page/1" }}
+        next={{ href: "/page/3" }}
+        items={makeItems(3, 2)}
+      />,
+    );
 
-    fireEvent.click(screen.getByText("Next"));
-    expect(onPageChange).toHaveBeenCalledWith(2);
+    const hiddenSpans = screen
+      .getAllByText("page")
+      .filter((el) => el.classList.contains("govuk-visually-hidden"));
+
+    // One inside the previous link, one inside the next link
+    expect(hiddenSpans).toHaveLength(2);
   });
 
-  test("calls onPageChange when previous button is clicked", () => {
-    const onPageChange = jest.fn();
-    setup({ currentPage: 2, onPageChange });
+  test("renders correct number of page list items", () => {
+    render(<Pagination next={{ href: "/page/2" }} items={makeItems(5, 1)} />);
 
-    fireEvent.click(screen.getByText("Previous"));
-    expect(onPageChange).toHaveBeenCalledWith(1);
-  });
-
-  test("disables previous button on first page", () => {
-    setup({ currentPage: 1 });
-    const prevButton = screen.getByText("Previous");
-    expect(prevButton.closest("a")).toBeNull(); // previous is not a link when disabled
-  });
-
-  test("disables next button on last page", () => {
-    setup({ currentPage: 10, totalCount: 100 });
-    const nextButton = screen.getByText("Next");
-    expect(nextButton.closest("a")).toBeNull(); // next is not a link when disabled
-  });
-
-  test("renders correct number of pagination items", () => {
-    setup({ currentPage: 1, totalCount: 50, pageSize: 10 });
-    expect(screen.getAllByRole("listitem").length).toBeGreaterThan(1); // ensure pagination items are rendered
-  });
-
-  test("renders DOTS when siblingCount is greater than 1", () => {
-    setup({ currentPage: 5, totalCount: 130, siblingCount: 2 });
-    expect(screen.getAllByText("...").length).toBeGreaterThan(1);
+    expect(screen.getAllByRole("listitem")).toHaveLength(5);
   });
 });

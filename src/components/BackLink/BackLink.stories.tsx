@@ -5,12 +5,12 @@
 import React from "react";
 import "./BackLink.scss";
 import BackLink from "./BackLink";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/back-link/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof BackLink> = {
-  title: "GOVUK Design System/BackLink",
+  title: "GOVUK Design System/Back link",
   component: BackLink,
   decorators: [
     (Story) => {

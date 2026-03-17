@@ -1,5 +1,5 @@
 import { PasswordInput, createAll } from "govuk-frontend";
 
-export function ConfigurePasswordInput($scope?: Document | Element) {
+export function ConfigureOverallPasswordInput($scope?: Document | Element) {
   createAll(PasswordInput, {}, $scope);
 }

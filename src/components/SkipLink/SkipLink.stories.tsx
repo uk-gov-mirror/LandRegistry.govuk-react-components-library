@@ -5,15 +5,29 @@
 import React from "react";
 import "./SkipLink.scss";
 import SkipLink from "./SkipLink";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/skip-link/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
+import { ConfigureOverallSkipLink } from "./SkipLink.config";
+
+let configured = false;
 const meta: Meta<typeof SkipLink> = {
-  title: "GOVUK Design System/SkipLink",
+  title: "GOVUK Design System/Skip link",
   component: SkipLink,
   decorators: [
-    (Story) => {
+    (Story, { parameters }) => {
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-skip-link--docs",
+        );
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallSkipLink();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallSkipLink();
+        }
+      }, []);
       return <Story />;
     },
   ],
