@@ -403,7 +403,7 @@ or in html
 
 ## Pagination migration
 
-The `Pagination` component API changed in v2.0.0. The previous API was computation-driven — you supplied raw counts and the component calculated the page range internally. The new API is render-driven: you supply the exact items to display, mirroring the [GOV.UK Design System pagination fixture shape](https://design-system.service.gov.uk/components/pagination/). This means the rendered HTML matches the Design System exactly and consumers have full control over what is shown.
+The `Pagination` component API changed in v1.1.0. The previous API was computation-driven — you supplied raw counts and the component calculated the page range internally. The new API is render-driven: you supply the exact items to display, mirroring the [GOV.UK Design System pagination fixture shape](https://design-system.service.gov.uk/components/pagination/). This means the rendered HTML matches the Design System exactly and consumers have full control over what is shown.
 
 <details>
   <summary>Basic numbered pagination</summary>
@@ -421,7 +421,7 @@ import { Pagination } from "@hmlr/govuk-react-components-library";
 />;
 ```
 
-**After (v2.0.0+)**
+**After (v1.1.0+)**
 
 ```jsx
 import { Pagination } from "@hmlr/govuk-react-components-library";
