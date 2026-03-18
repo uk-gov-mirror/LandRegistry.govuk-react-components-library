@@ -12,11 +12,9 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof InsetText> = {
   title: "GOVUK Design System/Inset text",
   component: InsetText,
-  decorators: [
-    (Story) => {
+  decorators: [(Story) => {
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -25,8 +23,7 @@ type Story = StoryObj<typeof InsetText>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -35,7 +32,5 @@ export const Default: Story = {
 
 export const WithHtml: Story = {
   name: "with html",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with html")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with html")?.options },
 };

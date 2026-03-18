@@ -15,12 +15,9 @@ let configured = false;
 const meta: Meta<typeof Tabs> = {
   title: "GOVUK Design System/Tabs",
   component: Tabs,
-  decorators: [
-    (Story, { parameters }) => {
+  decorators: [(Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes(
-          "path=/docs/govuk-design-system-tabs--docs",
-        );
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-tabs--docs");
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallTabs();
           configured = true;
@@ -29,8 +26,7 @@ const meta: Meta<typeof Tabs> = {
         }
       }, []);
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -39,8 +35,7 @@ type Story = StoryObj<typeof Tabs>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -49,8 +44,5 @@ export const Default: Story = {
 
 export const TabsWithAnchorInPanel: Story = {
   name: "tabs-with-anchor-in-panel",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "tabs-with-anchor-in-panel")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "tabs-with-anchor-in-panel")?.options },
 };

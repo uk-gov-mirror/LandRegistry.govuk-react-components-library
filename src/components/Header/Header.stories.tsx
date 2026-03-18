@@ -15,12 +15,9 @@ let configured = false;
 const meta: Meta<typeof Header> = {
   title: "GOVUK Design System/Header",
   component: Header,
-  decorators: [
-    (Story, { parameters }) => {
+  decorators: [(Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes(
-          "path=/docs/govuk-design-system-header--docs",
-        );
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-header--docs");
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallHeader();
           configured = true;
@@ -29,8 +26,7 @@ const meta: Meta<typeof Header> = {
         }
       }, []);
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -39,8 +35,7 @@ type Story = StoryObj<typeof Header>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -49,15 +44,10 @@ export const Default: Story = {
 
 export const WithProductName: Story = {
   name: "with product name",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with product name")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with product name")?.options },
 };
 
 export const FullWidth: Story = {
   name: "full width",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "full width")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "full width")?.options },
 };

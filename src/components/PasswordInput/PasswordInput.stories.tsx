@@ -15,12 +15,9 @@ let configured = false;
 const meta: Meta<typeof PasswordInput> = {
   title: "GOVUK Design System/Password input",
   component: PasswordInput,
-  decorators: [
-    (Story, { parameters }) => {
+  decorators: [(Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes(
-          "path=/docs/govuk-design-system-password-input--docs",
-        );
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-password-input--docs");
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallPasswordInput();
           configured = true;
@@ -29,8 +26,7 @@ const meta: Meta<typeof PasswordInput> = {
         }
       }, []);
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -39,8 +35,7 @@ type Story = StoryObj<typeof PasswordInput>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -49,31 +44,20 @@ export const Default: Story = {
 
 export const WithHintText: Story = {
   name: "with hint text",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with hint text")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with hint text")?.options },
 };
 
 export const WithErrorMessage: Story = {
   name: "with error message",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with error message")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with error message")?.options },
 };
 
 export const WithLabelAsPageHeading: Story = {
   name: "with label as page heading",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with label as page heading")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with label as page heading")?.options },
 };
 
 export const WithInputWidthClass: Story = {
   name: "with input width class",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with input width class")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with input width class")?.options },
 };

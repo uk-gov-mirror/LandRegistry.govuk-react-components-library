@@ -1,4 +1,4 @@
-import type { ArgTypes, Tag } from "@storybook/csf";
+import { ArgTypes, Tag } from "storybook/internal/csf";
 
 type AnyJson =
   | boolean

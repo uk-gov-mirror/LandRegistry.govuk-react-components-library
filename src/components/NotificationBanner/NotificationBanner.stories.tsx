@@ -15,12 +15,9 @@ let configured = false;
 const meta: Meta<typeof NotificationBanner> = {
   title: "GOVUK Design System/Notification banner",
   component: NotificationBanner,
-  decorators: [
-    (Story, { parameters }) => {
+  decorators: [(Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes(
-          "path=/docs/govuk-design-system-notification-banner--docs",
-        );
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-notification-banner--docs");
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallNotificationBanner();
           configured = true;
@@ -29,8 +26,7 @@ const meta: Meta<typeof NotificationBanner> = {
         }
       }, []);
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -39,8 +35,7 @@ type Story = StoryObj<typeof NotificationBanner>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -49,32 +44,20 @@ export const Default: Story = {
 
 export const WithTextAsHtml: Story = {
   name: "with text as html",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with text as html")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with text as html")?.options },
 };
 
 export const WithTypeAsSuccess: Story = {
   name: "with type as success",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with type as success")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with type as success")?.options },
 };
 
 export const WithLongHeading: Story = {
   name: "with long heading",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with long heading")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with long heading")?.options },
 };
 
 export const WithLotsOfContent: Story = {
   name: "with lots of content",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with lots of content")
-      ?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with lots of content")?.options },
 };

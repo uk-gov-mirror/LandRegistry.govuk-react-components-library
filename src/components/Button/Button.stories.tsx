@@ -15,12 +15,9 @@ let configured = false;
 const meta: Meta<typeof Button> = {
   title: "GOVUK Design System/Button",
   component: Button,
-  decorators: [
-    (Story, { parameters }) => {
+  decorators: [(Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes(
-          "path=/docs/govuk-design-system-button--docs",
-        );
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-button--docs");
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallButton();
           configured = true;
@@ -29,8 +26,7 @@ const meta: Meta<typeof Button> = {
         }
       }, []);
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -39,8 +35,7 @@ type Story = StoryObj<typeof Button>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -64,9 +59,7 @@ export const Start: Story = {
 
 export const Secondary: Story = {
   name: "secondary",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "secondary")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "secondary")?.options },
 };
 
 export const Warning: Story = {

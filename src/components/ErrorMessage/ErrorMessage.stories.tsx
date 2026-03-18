@@ -12,11 +12,9 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof ErrorMessage> = {
   title: "GOVUK Design System/Error message",
   component: ErrorMessage,
-  decorators: [
-    (Story) => {
+  decorators: [(Story) => {
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -25,8 +23,7 @@ type Story = StoryObj<typeof ErrorMessage>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -35,7 +32,5 @@ export const Default: Story = {
 
 export const Translated: Story = {
   name: "translated",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "translated")?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "translated")?.options },
 };

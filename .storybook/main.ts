@@ -6,9 +6,11 @@ import type { StorybookConfig } from "@storybook/react-webpack5";
 import type { Indexer } from "storybook/internal/types";
 import { loadCsf } from "storybook/internal/csf-tools";
 import { serverRequire } from "storybook/internal/common";
-import sass from "sass";
+import * as sass from "sass";
 import { compile } from "./compile.ts";
 import { vite, webpack, STORIES_REGEX } from "./unplugin.ts";
+
+const __filename = fileURLToPath(import.meta.url);
 
 const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));

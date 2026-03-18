@@ -15,12 +15,9 @@ let configured = false;
 const meta: Meta<typeof Accordion> = {
   title: "GOVUK Design System/Accordion",
   component: Accordion,
-  decorators: [
-    (Story, { parameters }) => {
+  decorators: [(Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes(
-          "path=/docs/govuk-design-system-accordion--docs",
-        );
+        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-accordion--docs");
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallAccordion();
           configured = true;
@@ -29,8 +26,7 @@ const meta: Meta<typeof Accordion> = {
         }
       }, []);
       return <Story />;
-    },
-  ],
+    }],
   tags: ["autodocs"],
 };
 
@@ -39,8 +35,7 @@ type Story = StoryObj<typeof Accordion>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> =
-  extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -49,27 +44,15 @@ export const Default: Story = {
 
 export const WithAdditionalDescriptions: Story = {
   name: "with additional descriptions",
-  args: {
-    ...examplesFromFixtures.find(
-      (f) => f.name === "with additional descriptions",
-    )?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with additional descriptions")?.options },
 };
 
 export const WithLongContentAndDescription: Story = {
   name: "with long content and description",
-  args: {
-    ...examplesFromFixtures.find(
-      (f) => f.name === "with long content and description",
-    )?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with long content and description")?.options },
 };
 
 export const WithAllSectionsAlreadyOpen: Story = {
   name: "with all sections already open",
-  args: {
-    ...examplesFromFixtures.find(
-      (f) => f.name === "with all sections already open",
-    )?.options,
-  },
+  args: { ...examplesFromFixtures.find((f) => f.name === "with all sections already open")?.options },
 };
