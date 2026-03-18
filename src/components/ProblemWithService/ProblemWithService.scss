@@ -1,9 +1,9 @@
 $govuk-images-path: "~govuk-frontend/dist/govuk/assets/images/";
 $govuk-fonts-path: "~govuk-frontend/dist/govuk/assets/fonts/";
-$govuk-assets-path: "~govuk-frontend/govuk/assets/";
+$govuk-assets-path: "~govuk-frontend/dist/govuk/assets/";
 
-@import "~govuk-frontend/dist/govuk/base";
-@import "~govuk-frontend/dist/govuk/components/error-summary/error-summary";
+@use "~govuk-frontend/dist/govuk/base";
+@use "~govuk-frontend/dist/govuk/components/error-summary";
 
 .opens-in-new-window {
   &::after {

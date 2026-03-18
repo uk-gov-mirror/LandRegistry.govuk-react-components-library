@@ -38,13 +38,6 @@ export const Grey: Story = {
   args: { ...examplesFromFixtures.find((f) => f.name === "grey")?.options },
 };
 
-export const LightBlue: Story = {
-  name: "light blue",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "light blue")?.options,
-  },
-};
-
 export const Turquoise: Story = {
   name: "turquoise",
   args: {

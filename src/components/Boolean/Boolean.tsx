@@ -54,116 +54,115 @@ const Boolean: React.FC<BooleanProps> = ({
         {...attributes}
         data-module={`govuk-${controlType}`}
       >
-        {items &&
-          items.map((item: BooleanItem, index: number) => {
-            if (!item) {
-              return null;
-            }
+        {items?.map((item: BooleanItem, index: number) => {
+          if (!item) {
+            return null;
+          }
 
-            if (item.behaviour === "exclusive") {
-              delete item.behaviour;
-            }
+          if (item.behaviour === "exclusive") {
+            delete item.behaviour;
+          }
 
-            const {
-              id,
-              children,
-              hint: itemHint,
-              conditional: itemConditional,
-              behaviour,
-              label,
-              reactListKey,
-              ...itemAttributes
-            } = item;
+          const {
+            id,
+            children,
+            hint: itemHint,
+            conditional: itemConditional,
+            behaviour,
+            label,
+            reactListKey,
+            ...itemAttributes
+          } = item;
 
-            const idSuffix: string = `-${index + 1}`;
-            const idValue: string =
-              id || `${idPrefixValue}${index === 0 ? "" : idSuffix}`;
-            const nameValue: string | undefined = item.name ? item.name : name;
-            const conditionalId: string | undefined = itemConditional?.children
-              ? `conditional-${idValue}`
-              : undefined;
-            const itemHintId: string = `${idValue}-item-hint`;
+          const idSuffix: string = `-${index + 1}`;
+          const idValue: string =
+            id || `${idPrefixValue}${index === 0 ? "" : idSuffix}`;
+          const nameValue: string | undefined = item.name ? item.name : name;
+          const conditionalId: string | undefined = itemConditional?.children
+            ? `conditional-${idValue}`
+            : undefined;
+          const itemHintId: string = `${idValue}-item-hint`;
 
-            let itemDescribedBy: string = "";
+          let itemDescribedBy: string = "";
 
-            if (controlType === "checkboxes" && !hasFieldset) {
-              itemDescribedBy = describedBy;
-            }
+          if (controlType === "checkboxes" && !hasFieldset) {
+            itemDescribedBy = describedBy;
+          }
 
-            if (itemHint) {
-              itemDescribedBy += ` ${itemHintId}`;
-            }
+          if (itemHint) {
+            itemDescribedBy += ` ${itemHintId}`;
+          }
 
-            if (item.divider) {
-              return (
-                <div
-                  key={reactListKey || index}
-                  className={`govuk-${controlType}__divider`}
-                >
-                  {item.divider}
-                </div>
-              );
-            }
-
+          if (item.divider) {
             return (
-              <React.Fragment key={reactListKey || index}>
-                <div className={`govuk-${controlType}__item`}>
-                  <input
-                    className={`govuk-${controlType}__input`}
-                    id={idValue}
-                    name={nameValue}
-                    type={controlType === "radios" ? "radio" : "checkbox"}
-                    data-aria-controls={conditionalId}
-                    aria-describedby={itemDescribedBy || undefined}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    data-behaviour={behaviour}
-                    {...itemAttributes}
-                  />
-                  <Label
-                    {...{
-                      ...label,
-                      className: `govuk-${controlType}__label ${
-                        label?.className || ""
-                      }`,
-                      htmlFor: idValue,
-                      isPageHeading: false,
-                    }}
-                  >
-                    {children}
-                  </Label>
-                  {itemHint ? (
-                    <Hint
-                      {...{
-                        ...itemHint,
-                        className: `govuk-${controlType}__hint ${
-                          itemHint.className || ""
-                        }`,
-                      }}
-                      id={itemHintId}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </div>
+              <div
+                key={reactListKey || index}
+                className={`govuk-${controlType}__divider`}
+              >
+                {item.divider}
+              </div>
+            );
+          }
 
-                {itemConditional?.children ? (
-                  <div
-                    className={`govuk-${controlType}__conditional ${
-                      item.checked
-                        ? ""
-                        : `govuk-${controlType}__conditional--hidden`
-                    }`}
-                    id={conditionalId}
-                  >
-                    {itemConditional.children}
-                  </div>
+          return (
+            <React.Fragment key={reactListKey || index}>
+              <div className={`govuk-${controlType}__item`}>
+                <input
+                  className={`govuk-${controlType}__input`}
+                  id={idValue}
+                  name={nameValue}
+                  type={controlType === "radios" ? "radio" : "checkbox"}
+                  data-aria-controls={conditionalId}
+                  aria-describedby={itemDescribedBy || undefined}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  data-behaviour={behaviour}
+                  {...itemAttributes}
+                />
+                <Label
+                  {...{
+                    ...label,
+                    className: `govuk-${controlType}__label ${
+                      label?.className || ""
+                    }`,
+                    htmlFor: idValue,
+                    isPageHeading: false,
+                  }}
+                >
+                  {children}
+                </Label>
+                {itemHint ? (
+                  <Hint
+                    {...{
+                      ...itemHint,
+                      className: `govuk-${controlType}__hint ${
+                        itemHint.className || ""
+                      }`,
+                    }}
+                    id={itemHintId}
+                  />
                 ) : (
                   ""
                 )}
-              </React.Fragment>
-            );
-          })}
+              </div>
+
+              {itemConditional?.children ? (
+                <div
+                  className={`govuk-${controlType}__conditional ${
+                    item.checked
+                      ? ""
+                      : `govuk-${controlType}__conditional--hidden`
+                  }`}
+                  id={conditionalId}
+                >
+                  {itemConditional.children}
+                </div>
+              ) : (
+                ""
+              )}
+            </React.Fragment>
+          );
+        })}
       </div>
     </>
   );

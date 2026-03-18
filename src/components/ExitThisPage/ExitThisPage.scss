@@ -1,6 +1,1 @@
-$govuk-images-path: "~govuk-frontend/dist/govuk/assets/images/";
-$govuk-fonts-path: "~govuk-frontend/dist/govuk/assets/fonts/";
-$govuk-assets-path: "~govuk-frontend/govuk/assets/";
-$govuk-font-family: "Arial", sans-serif;
-
-@import "~govuk-frontend/dist/govuk/components/exit-this-page/exit-this-page";
+@use "~govuk-frontend/dist/govuk/components/exit-this-page" as *;

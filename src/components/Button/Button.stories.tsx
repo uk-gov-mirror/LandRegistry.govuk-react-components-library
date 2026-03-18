@@ -62,11 +62,6 @@ export const Start: Story = {
   args: { ...examplesFromFixtures.find((f) => f.name === "start")?.options },
 };
 
-export const Input: Story = {
-  name: "input",
-  args: { ...examplesFromFixtures.find((f) => f.name === "input")?.options },
-};
-
 export const Secondary: Story = {
   name: "secondary",
   args: {
