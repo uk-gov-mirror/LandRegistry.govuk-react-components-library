@@ -12,9 +12,11 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof FileUpload> = {
   title: "GOVUK Design System/File upload",
   component: FileUpload,
-  decorators: [(Story) => {
+  decorators: [
+    (Story) => {
       return <Story />;
-    }],
+    },
+  ],
   tags: ["autodocs"],
 };
 
@@ -23,7 +25,8 @@ type Story = StoryObj<typeof FileUpload>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> =
+  extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -32,17 +35,26 @@ export const Default: Story = {
 
 export const WithHintText: Story = {
   name: "with hint text",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with hint text")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hint text")?.options,
+  },
 };
 
 export const WithErrorMessageAndHint: Story = {
   name: "with error message and hint",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with error message and hint")?.options },
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with error message and hint",
+    )?.options,
+  },
 };
 
 export const WithLabelAsPageHeading: Story = {
   name: "with label as page heading",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with label as page heading")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with label as page heading")
+      ?.options,
+  },
 };
 
 export const Enhanced: Story = {
@@ -52,15 +64,24 @@ export const Enhanced: Story = {
 
 export const EnhancedWithErrorMessageAndHint: Story = {
   name: "enhanced, with error message and hint",
-  args: { ...examplesFromFixtures.find((f) => f.name === "enhanced, with error message and hint")?.options },
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "enhanced, with error message and hint",
+    )?.options,
+  },
 };
 
 export const EnhancedMultipleFiles: Story = {
   name: "enhanced, multiple files",
-  args: { ...examplesFromFixtures.find((f) => f.name === "enhanced, multiple files")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "enhanced, multiple files")
+      ?.options,
+  },
 };
 
 export const Translated: Story = {
   name: "translated",
-  args: { ...examplesFromFixtures.find((f) => f.name === "translated")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "translated")?.options,
+  },
 };

@@ -4,7 +4,7 @@
 npm run lint
 
 # Run format before commit
-npm run format
+npm run lint-fix
 
 # generate uml diagram before commit
 npm run uml
