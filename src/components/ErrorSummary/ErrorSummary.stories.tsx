@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/error-summary/fixtures.json
+// Regenerate: npm run generate-stories
+
+import React from "react";
 import "./ErrorSummary.scss";
 import ErrorSummary from "./ErrorSummary";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/error-summary/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -13,21 +17,16 @@ const meta: Meta<typeof ErrorSummary> = {
   component: ErrorSummary,
   decorators: [
     (Story, { parameters }) => {
-      useEffect(() => {
-        const configureErrorSummary = () => {
-          const isDocsMode = window.location.search.includes("viewMode=docs");
-          if (
-            isDocsMode &&
-            !configured &&
-            parameters.initializeConfigurations
-          ) {
-            ConfigureOverallErrorSummary();
-            configured = true;
-          } else if (!isDocsMode) {
-            ConfigureOverallErrorSummary();
-          }
-        };
-        configureErrorSummary();
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-error-summary--docs",
+        );
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallErrorSummary();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallErrorSummary();
+        }
       }, []);
       return <Story />;
     },
@@ -38,24 +37,43 @@ const meta: Meta<typeof ErrorSummary> = {
 export default meta;
 type Story = StoryObj<typeof ErrorSummary>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const WithoutLinks = createStory(1);
-export const MixedWithAndWithoutLinks = createStory(2);
-export const WithDescriptionOnly = createStory(3);
-export const WithEverything = {
-  ...createStory(4),
-  parameters: { initializeConfigurations: true },
+export const WithoutLinks: Story = {
+  name: "without links",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "without links")?.options,
+  },
+};
+
+export const MixedWithAndWithoutLinks: Story = {
+  name: "mixed with and without links",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "mixed with and without links",
+    )?.options,
+  },
+};
+
+export const WithDescriptionOnly: Story = {
+  name: "with description only",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with description only")
+      ?.options,
+  },
+};
+
+export const WithEverything: Story = {
+  name: "with everything",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with everything")?.options,
+  },
 };

@@ -4,7 +4,7 @@ image: node:lts
 before_script:
   - node -v
   - npm -v
-  - npm ci
+  - npm install
   - npm install pdfjs-dist@4.10.38 --save-dev
 
 cache:

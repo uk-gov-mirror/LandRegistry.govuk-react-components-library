@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/notification-banner/fixtures.json
+// Regenerate: npm run generate-stories
+
+import React from "react";
 import "./NotificationBanner.scss";
 import NotificationBanner from "./NotificationBanner";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/notification-banner/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -13,21 +17,16 @@ const meta: Meta<typeof NotificationBanner> = {
   component: NotificationBanner,
   decorators: [
     (Story, { parameters }) => {
-      useEffect(() => {
-        const configureNotificationBanner = () => {
-          const isDocsMode = window.location.search.includes("viewMode=docs");
-          if (
-            isDocsMode &&
-            !configured &&
-            parameters.initializeConfigurations
-          ) {
-            ConfigureOverallNotificationBanner();
-            configured = true;
-          } else if (!isDocsMode) {
-            ConfigureOverallNotificationBanner();
-          }
-        };
-        configureNotificationBanner();
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-notification-banner--docs",
+        );
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallNotificationBanner();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallNotificationBanner();
+        }
       }, []);
       return <Story />;
     },
@@ -38,31 +37,44 @@ const meta: Meta<typeof NotificationBanner> = {
 export default meta;
 type Story = StoryObj<typeof NotificationBanner>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const ParagraphAsHtmlHeading = createStory(1);
-export const WithTextAsHtml = createStory(2);
-export const WithTypeAsSuccess = createStory(3);
-export const SuccessWithCustomHtml = createStory(4);
-export const WithAList = createStory(5);
-export const WithLongHeading = createStory(6);
-export const WithLotsOfContent = createStory(7);
-export const AutoFocusDisabledWithTypeAsSuccess = createStory(8);
-export const AutoFocusExplicitlyEnabledWithTypeAsSuccess = createStory(9);
-export const RoleAlertOverriddenToRoleRegionWithTypeAsSuccess = createStory(10);
-export const CustomTabindex = {
-  ...createStory(11),
-  parameters: { initializeConfigurations: true },
+export const WithTextAsHtml: Story = {
+  name: "with text as html",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with text as html")
+      ?.options,
+  },
+};
+
+export const WithTypeAsSuccess: Story = {
+  name: "with type as success",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with type as success")
+      ?.options,
+  },
+};
+
+export const WithLongHeading: Story = {
+  name: "with long heading",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with long heading")
+      ?.options,
+  },
+};
+
+export const WithLotsOfContent: Story = {
+  name: "with lots of content",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with lots of content")
+      ?.options,
+  },
 };

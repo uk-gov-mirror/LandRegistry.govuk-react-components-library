@@ -501,7 +501,6 @@ var Module = (() => {
             for (
               "function" == typeof d.postRun && (d.postRun = [d.postRun]);
               d.postRun.length;
-
             ) {
               var b = d.postRun.shift();
               G.unshift(b);
@@ -514,7 +513,6 @@ var Module = (() => {
           for (
             "function" == typeof d.preRun && (d.preRun = [d.preRun]);
             d.preRun.length;
-
           )
             ba();
         N(E);
@@ -534,7 +532,6 @@ var Module = (() => {
       for (
         "function" == typeof d.preInit && (d.preInit = [d.preInit]);
         0 < d.preInit.length;
-
       )
         d.preInit.pop()();
     na();

@@ -1,76 +1,105 @@
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/pagination/fixtures.json
+// Regenerate: npm run generate-stories
+
 import React from "react";
 import "./Pagination.scss";
-import { Meta } from "@storybook/react-vite";
 import Pagination from "./Pagination";
-import { action } from "storybook/actions";
-// import fixtures from "govuk-frontend/dist/govuk/components/pagination/fixtures.json";
-
-export default {
+import { Meta, StoryObj } from "@storybook/react-webpack5";
+import fixtures from "govuk-frontend/dist/govuk/components/pagination/fixtures.json";
+import { extractShownFixtures } from "../../utils/ProcessExampleData";
+import { ComponentFixture } from "../../dynamics";
+const meta: Meta<typeof Pagination> = {
   title: "GOVUK Design System/Pagination",
   component: Pagination,
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
+  decorators: [
+    (Story) => {
+      return <Story />;
+    },
+  ],
   tags: ["autodocs"],
-  args: { onPageChange: action("on-click") },
-} as Meta<typeof Pagination>;
+};
 
-export const DefaultExample = {
+export default meta;
+type Story = StoryObj<typeof Pagination>;
+
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
+const examplesFromFixtures: Array<ComponentFixture> =
+  extractShownFixtures(fixtures);
+
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
+};
+
+export const WithCustomLinkAndItemText: Story = {
+  name: "with custom link and item text",
   args: {
-    currentPage: 3,
-    totalCount: 150,
-    pageSize: 25,
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with custom link and item text",
+    )?.options,
   },
 };
 
-export const startExample = {
+export const WithManyPages: Story = {
+  name: "with many pages",
   args: {
-    currentPage: 1,
-    totalCount: 150,
-    pageSize: 25,
+    ...examplesFromFixtures.find((f) => f.name === "with many pages")?.options,
   },
 };
 
-export const endExample = {
+export const FirstPage: Story = {
+  name: "first page",
   args: {
-    currentPage: 6,
-    totalCount: 150,
-    pageSize: 25,
+    ...examplesFromFixtures.find((f) => f.name === "first page")?.options,
   },
 };
 
-export const ChangePreviousTextToBack = {
+export const LastPage: Story = {
+  name: "last page",
   args: {
-    ...startExample.args,
-    previousName: "Back",
+    ...examplesFromFixtures.find((f) => f.name === "last page")?.options,
   },
 };
 
-export const ChangeNextTextToForward = {
+export const WithPrevAndNextOnly: Story = {
+  name: "with prev and next only",
   args: {
-    ...endExample.args,
-    nextName: "Forward",
+    ...examplesFromFixtures.find((f) => f.name === "with prev and next only")
+      ?.options,
   },
 };
 
-export const AddPreviousChildren = {
+export const WithPrevAndNextOnlyAndLabels: Story = {
+  name: "with prev and next only and labels",
   args: {
-    ...startExample.args,
-    previousName: "Back",
-    previousChildren: (
-      <span className="govuk-pagination__link-label">
-        Applying for a provisional lorry or bus licence
-      </span>
-    ),
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with prev and next only and labels",
+    )?.options,
   },
 };
 
-export const AddNextChildren = {
+export const WithPrevAndNextOnlyAndVeryLongLabels: Story = {
+  name: "with prev and next only and very long labels",
   args: {
-    ...endExample.args,
-    nextName: "Forward",
-    nextChildren: (
-      <span className="govuk-pagination__link-label">
-        Driver CPC part 1 test: theory
-      </span>
-    ),
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with prev and next only and very long labels",
+    )?.options,
+  },
+};
+
+export const WithPreviousOnly: Story = {
+  name: "with previous only",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with previous only")
+      ?.options,
+  },
+};
+
+export const WithNextOnly: Story = {
+  name: "with next only",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with next only")?.options,
   },
 };

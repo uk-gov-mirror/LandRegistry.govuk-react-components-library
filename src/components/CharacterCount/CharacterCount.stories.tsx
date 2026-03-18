@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/character-count/fixtures.json
+// Regenerate: npm run generate-stories
+
+import React from "react";
 import "./CharacterCount.scss";
 import CharacterCount from "./CharacterCount";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/character-count/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -13,21 +17,16 @@ const meta: Meta<typeof CharacterCount> = {
   component: CharacterCount,
   decorators: [
     (Story, { parameters }) => {
-      useEffect(() => {
-        const configureCharacterCount = () => {
-          const isDocsMode = window.location.search.includes("viewMode=docs");
-          if (
-            isDocsMode &&
-            !configured &&
-            parameters.initializeConfigurations
-          ) {
-            ConfigureOverallCharacterCount();
-            configured = true;
-          } else if (!isDocsMode) {
-            ConfigureOverallCharacterCount();
-          }
-        };
-        configureCharacterCount();
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-character-count--docs",
+        );
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallCharacterCount();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallCharacterCount();
+        }
       }, []);
       return <Story />;
     },
@@ -38,29 +37,73 @@ const meta: Meta<typeof CharacterCount> = {
 export default meta;
 type Story = StoryObj<typeof CharacterCount>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const WithCustomTextareaDescription = createStory(1);
-export const WithHint = createStory(2);
-export const WithDefaultValue = createStory(3);
-export const WithDefaultValueExceedingLimit = createStory(4);
-export const WithCustomRows = createStory(5);
-export const WithLabelAsPageHeading = createStory(6);
-export const WithWordCount = createStory(7);
-export const WithThreshold = createStory(8);
-export const WithTranslations = {
-  ...createStory(9),
-  parameters: { initializeConfigurations: true },
+export const WithHint: Story = {
+  name: "with hint",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hint")?.options,
+  },
+};
+
+export const WithHintAndError: Story = {
+  name: "with hint and error",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hint and error")
+      ?.options,
+  },
+};
+
+export const WithDefaultValue: Story = {
+  name: "with default value",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with default value")
+      ?.options,
+  },
+};
+
+export const WithDefaultValueExceedingLimit: Story = {
+  name: "with default value exceeding limit",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with default value exceeding limit",
+    )?.options,
+  },
+};
+
+export const WithCustomRows: Story = {
+  name: "with custom rows",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with custom rows")?.options,
+  },
+};
+
+export const WithLabelAsPageHeading: Story = {
+  name: "with label as page heading",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with label as page heading")
+      ?.options,
+  },
+};
+
+export const WithWordCount: Story = {
+  name: "with word count",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with word count")?.options,
+  },
+};
+
+export const WithThreshold: Story = {
+  name: "with threshold",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with threshold")?.options,
+  },
 };

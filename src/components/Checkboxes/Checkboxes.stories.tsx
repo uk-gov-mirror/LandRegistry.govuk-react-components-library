@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/checkboxes/fixtures.json
+// Regenerate: npm run generate-stories
+
+import React from "react";
 import "./Checkboxes.scss";
 import Checkboxes from "./Checkboxes";
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/checkboxes/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-import { WithItemRefs } from "../../utils/WithReference";
 import { ConfigureOverallCheckboxes } from "./Checkboxes.config";
-import { action } from "storybook/actions";
 
 let configured = false;
 const meta: Meta<typeof Checkboxes> = {
@@ -15,80 +17,159 @@ const meta: Meta<typeof Checkboxes> = {
   component: Checkboxes,
   decorators: [
     (Story, { parameters }) => {
-      useEffect(() => {
-        const configureCheckboxes = () => {
-          const isDocsMode = window.location.search.includes("viewMode=docs");
-          if (
-            isDocsMode &&
-            !configured &&
-            parameters.initializeConfigurations
-          ) {
-            ConfigureOverallCheckboxes();
-            configured = true;
-          } else if (!isDocsMode) {
-            ConfigureOverallCheckboxes();
-          }
-        };
-        configureCheckboxes();
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-checkboxes--docs",
+        );
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallCheckboxes();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallCheckboxes();
+        }
       }, []);
       return <Story />;
     },
   ],
   tags: ["autodocs"],
-  args: { onChange: action("on-change"), onBlur: action("on-blur") },
 };
 
 export default meta;
 type Story = StoryObj<typeof Checkboxes>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const WithPreCheckedValues = createStory(1);
-export const WithDividerAndNone = createStory(2);
-export const WithDividerNoneAndConditionalItems = createStory(3);
-export const WithIdAndName = createStory(4);
-export const WithHintsOnItems = createStory(5);
-export const WithDisabledItem = createStory(6);
-export const WithLegendAsAPageHeading = createStory(7);
-export const WithAMediumLegend = createStory(8);
-export const WithoutFieldset = createStory(9);
-export const WithSingleOptionSetAriaDescribedbyOnInput = createStory(10);
-export const WithSingleOptionAndHintSetAriaDescribedbyOnInput = createStory(11);
-export const WithFieldsetAndErrorMessage = createStory(12);
-export const WithErrorMessage = createStory(13);
-export const WithErrorMessageAndHintsOnItems = createStory(14);
-export const WithVeryLongOptionText = createStory(15);
-export const WithConditionalItems = createStory(16);
-export const WithConditionalItemsWithSpecialCharacters = createStory(17);
-export const WithConditionalItemChecked = createStory(18);
-export const WithOptionalFormGroupClassesShowingGroupError = createStory(19);
-export const Small = createStory(20);
-export const SmallWithLongText = createStory(21);
-export const SmallWithError = createStory(22);
-export const SmallWithHint = createStory(23);
-export const SmallWithDisabled = createStory(24);
-export const SmallWithConditionalReveal = createStory(25);
-export const SmallWithDividerAndNone = createStory(26);
+export const WithHint: Story = {
+  name: "with hint",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hint")?.options,
+  },
+};
 
-// Template with reference
-const Template: StoryFn<typeof Checkboxes> = (args) => (
-  <WithItemRefs Component={Checkboxes} {...args} />
-);
+export const WithPreCheckedValues: Story = {
+  name: "with pre-checked values",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with pre-checked values")
+      ?.options,
+  },
+};
 
-export const WithReference = {
-  render: Template,
-  args: { ...DefaultExample.args },
-  parameters: { initializeConfigurations: true },
+export const WithDividerAndNone: Story = {
+  name: "with divider and None",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with divider and None")
+      ?.options,
+  },
+};
+
+export const WithDividerNoneAndConditionalItems: Story = {
+  name: "with divider, None and conditional items",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with divider, None and conditional items",
+    )?.options,
+  },
+};
+
+export const WithHintsOnItems: Story = {
+  name: "with hints on items",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hints on items")
+      ?.options,
+  },
+};
+
+export const WithLegendAsAPageHeading: Story = {
+  name: "with legend as a page heading",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with legend as a page heading",
+    )?.options,
+  },
+};
+
+export const WithErrorMessage: Story = {
+  name: "with error message",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with error message")
+      ?.options,
+  },
+};
+
+export const WithVeryLongOptionText: Story = {
+  name: "with very long option text",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with very long option text")
+      ?.options,
+  },
+};
+
+export const WithConditionalItems: Story = {
+  name: "with conditional items",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with conditional items")
+      ?.options,
+  },
+};
+
+export const WithOptionalFormGroupClassesShowingGroupError: Story = {
+  name: "with optional form-group classes showing group error",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with optional form-group classes showing group error",
+    )?.options,
+  },
+};
+
+export const Small: Story = {
+  name: "small",
+  args: { ...examplesFromFixtures.find((f) => f.name === "small")?.options },
+};
+
+export const SmallWithLongText: Story = {
+  name: "small with long text",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "small with long text")
+      ?.options,
+  },
+};
+
+export const SmallWithError: Story = {
+  name: "small with error",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "small with error")?.options,
+  },
+};
+
+export const SmallWithHint: Story = {
+  name: "small with hint",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "small with hint")?.options,
+  },
+};
+
+export const SmallWithConditionalReveal: Story = {
+  name: "small with conditional reveal",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "small with conditional reveal",
+    )?.options,
+  },
+};
+
+export const SmallWithDividerAndNone: Story = {
+  name: "small with divider and None",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "small with divider and None",
+    )?.options,
+  },
 };

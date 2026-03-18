@@ -1,36 +1,59 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/cookie-banner/fixtures.json
+// Regenerate: npm run generate-stories
+
 import React from "react";
 import "./CookieBanner.scss";
 import CookieBanner from "./CookieBanner";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/cookie-banner/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-
 const meta: Meta<typeof CookieBanner> = {
   title: "GOVUK Design System/Cookie banner",
   component: CookieBanner,
+  decorators: [
+    (Story) => {
+      return <Story />;
+    },
+  ],
   tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof CookieBanner>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const AcceptedConfirmationBanner = createStory(1);
-export const RejectedConfirmationBanner = createStory(2);
-export const ClientSideImplementation = createStory(3);
-export const WithHtml = createStory(4);
+export const AcceptedConfirmationBanner: Story = {
+  name: "accepted confirmation banner",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "accepted confirmation banner",
+    )?.options,
+  },
+};
+
+export const RejectedConfirmationBanner: Story = {
+  name: "rejected confirmation banner",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "rejected confirmation banner",
+    )?.options,
+  },
+};
+
+export const WithHtml: Story = {
+  name: "with html",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with html")?.options,
+  },
+};

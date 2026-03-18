@@ -1,47 +1,34 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/panel/fixtures.json
+// Regenerate: npm run generate-stories
+
 import React from "react";
 import "./Panel.scss";
 import Panel from "./Panel";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/panel/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-
 const meta: Meta<typeof Panel> = {
   title: "GOVUK Design System/Panel",
   component: Panel,
+  decorators: [
+    (Story) => {
+      return <Story />;
+    },
+  ],
   tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof Panel>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example = examplesFromFixtures[index];
-  if (!example) {
-    throw new Error(
-      `No fixture found at index ${index}. Available fixtures: ${examplesFromFixtures.length}`,
-    );
-  }
-  return {
-    name: example.name,
-    args: { ...example.options },
-  };
-};
-
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-
-// Create a custom story for heading level since it's not in the visible fixtures
-export const CustomHeadingLevel: Story = {
-  name: "Custom Heading Level",
-  args: {
-    titleChildren: "Application complete",
-    children: "Your reference number: HDJ2123F",
-    headingLevel: "h2",
-  },
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };

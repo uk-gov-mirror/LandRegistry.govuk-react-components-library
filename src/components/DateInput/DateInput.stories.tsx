@@ -1,53 +1,94 @@
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/date-input/fixtures.json
+// Regenerate: npm run generate-stories
+
 import React from "react";
 import "./DateInput.scss";
 import DateInput from "./DateInput";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/date-input/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
-import { WithItemRefs } from "../../utils/WithReference";
-
 const meta: Meta<typeof DateInput> = {
   title: "GOVUK Design System/Date input",
   component: DateInput,
+  decorators: [
+    (Story) => {
+      return <Story />;
+    },
+  ],
   tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof DateInput>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const CompleteQuestion = createStory(1);
-export const DayAndMonth = createStory(2);
-export const MonthAndYear = createStory(3);
-export const WithErrorsOnly = createStory(4);
-export const WithErrorsAndHint = createStory(5);
-export const WithErrorOnDayInput = createStory(6);
-export const WithErrorOnMonthInput = createStory(7);
-export const WithErrorOnYearInput = createStory(8);
-export const WithDefaultItems = createStory(9);
-export const WithOptionalFormGroupClasses = createStory(10);
-export const WithAutocompleteValues = createStory(11);
-export const WithInputAttributes = createStory(12);
+export const DayAndMonth: Story = {
+  name: "day and month",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "day and month")?.options,
+  },
+};
 
-const Template: StoryFn<typeof DateInput> = (args) => (
-  <WithItemRefs Component={DateInput} {...args} />
-);
-const example = examplesFromFixtures[1];
-export const WithReference = {
-  render: Template,
-  args: { ...example.options },
+export const MonthAndYear: Story = {
+  name: "month and year",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "month and year")?.options,
+  },
+};
+
+export const WithErrorsOnly: Story = {
+  name: "with errors only",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with errors only")?.options,
+  },
+};
+
+export const WithErrorsAndHint: Story = {
+  name: "with errors and hint",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with errors and hint")
+      ?.options,
+  },
+};
+
+export const WithErrorOnDayInput: Story = {
+  name: "with error on day input",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with error on day input")
+      ?.options,
+  },
+};
+
+export const WithErrorOnMonthInput: Story = {
+  name: "with error on month input",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with error on month input")
+      ?.options,
+  },
+};
+
+export const WithErrorOnYearInput: Story = {
+  name: "with error on year input",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with error on year input")
+      ?.options,
+  },
+};
+
+export const WithItems: Story = {
+  name: "with items",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with items")?.options,
+  },
 };

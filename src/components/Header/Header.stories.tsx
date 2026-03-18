@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+// THIS FILE IS AUTO-GENERATED — do not edit manually.
+// Source: node_modules/govuk-frontend/dist/govuk/components/header/fixtures.json
+// Regenerate: npm run generate-stories
+
+import React from "react";
 import "./Header.scss";
 import Header from "./Header";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import { Meta, StoryObj } from "@storybook/react-webpack5";
 import fixtures from "govuk-frontend/dist/govuk/components/header/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -13,21 +17,16 @@ const meta: Meta<typeof Header> = {
   component: Header,
   decorators: [
     (Story, { parameters }) => {
-      useEffect(() => {
-        const configureHeader = () => {
-          const isDocsMode = window.location.search.includes("viewMode=docs");
-          if (
-            isDocsMode &&
-            !configured &&
-            parameters.initializeConfigurations
-          ) {
-            ConfigureOverallHeader();
-            configured = true;
-          } else if (!isDocsMode) {
-            ConfigureOverallHeader();
-          }
-        };
-        configureHeader();
+      React.useEffect(() => {
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-header--docs",
+        );
+        if (isDocsMode && !configured && parameters.initializeConfigurations) {
+          ConfigureOverallHeader();
+          configured = true;
+        } else if (!isDocsMode) {
+          ConfigureOverallHeader();
+        }
       }, []);
       return <Story />;
     },
@@ -38,67 +37,118 @@ const meta: Meta<typeof Header> = {
 export default meta;
 type Story = StoryObj<typeof Header>;
 
+// extractShownFixtures transforms raw govuk-frontend fixture data into
+// React-compatible props (e.g. text → children, classes → className).
 const examplesFromFixtures: Array<ComponentFixture> =
   extractShownFixtures(fixtures);
 
-// Utility function to create stories from fixtures
-const createStory = (index: number): Story => {
-  const example: ComponentFixture | undefined = examplesFromFixtures[index];
-  return {
-    name: example?.name,
-    args: { ...example?.options },
-  };
+export const Default: Story = {
+  name: "default",
+  args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
-// Manually adding a custom story for "WithoutGovUkHeader"
-export const WithoutGovUkHeader: Story = {
+
+export const WithServiceName: Story = {
+  name: "with service name",
   args: {
-    ...examplesFromFixtures[0].options,
-    removeGovUKHeader: true,
-    productName: (
-      <>
-        <div>
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            className="govuk-header__logotype-crown"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 132 97"
-            height="30"
-            width="36"
-          >
-            <path
-              fill="currentColor"
-              fillRule="evenodd"
-              d="..." // The rest of the path data
-            />
-          </svg>
-          <span className="hmlr-header__title no-underline">
-            {" "}
-            Document and plan retrieval system
-          </span>
-        </div>
-      </>
-    ),
+    ...examplesFromFixtures.find((f) => f.name === "with service name")
+      ?.options,
   },
 };
 
-// Stories generated from fixtures
-export const DefaultExample = createStory(0);
-export const WithStEdwardSCrown = createStory(1);
-export const WithServiceName = createStory(2);
-export const WithServiceNameButNoServiceUrl = createStory(3);
-export const WithNavigation = createStory(4);
-export const WithCustomNavigationLabel = createStory(5);
-export const WithCustomMenuButtonText = createStory(6);
-export const WithCustomMenuButtonLabel = createStory(7);
-export const WithServiceNameAndNavigation = createStory(8);
-export const WithLargeNavigation = createStory(9);
-export const WithProductName = createStory(10);
-export const FullWidth = createStory(11);
-export const FullWidthWithNavigation = createStory(12);
-export const WithFullWidthBorder = createStory(13);
-export const NavigationItemWithHtml = createStory(14);
-export const NavigationItemWithTextWithoutLink = {
-  ...createStory(15),
-  parameters: { initializeConfigurations: true },
+export const WithServiceNameButNoServiceUrl: Story = {
+  name: "with service name but no service url",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with service name but no service url",
+    )?.options,
+  },
+};
+
+export const WithNavigation: Story = {
+  name: "with navigation",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with navigation")?.options,
+  },
+};
+
+export const WithCustomMenuButtonText: Story = {
+  name: "with custom menu button text",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with custom menu button text",
+    )?.options,
+  },
+};
+
+export const WithServiceNameAndNavigation: Story = {
+  name: "with service name and navigation",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with service name and navigation",
+    )?.options,
+  },
+};
+
+export const WithLargeNavigation: Story = {
+  name: "with large navigation",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with large navigation")
+      ?.options,
+  },
+};
+
+export const WithProductName: Story = {
+  name: "with product name",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with product name")
+      ?.options,
+  },
+};
+
+export const FullWidth: Story = {
+  name: "full width",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "full width")?.options,
+  },
+};
+
+export const FullWidthWithNavigation: Story = {
+  name: "full width with navigation",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "full width with navigation")
+      ?.options,
+  },
+};
+
+export const WithFullWidthBorder: Story = {
+  name: "with full width border",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with full width border")
+      ?.options,
+  },
+};
+
+export const NavigationItemWithHtml: Story = {
+  name: "navigation item with html",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "navigation item with html")
+      ?.options,
+  },
+};
+
+export const NavigationItemWithTextWithoutLink: Story = {
+  name: "navigation item with text without link",
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "navigation item with text without link",
+    )?.options,
+  },
+};
+
+export const WithStEdwardSCrown: Story = {
+  name: "with St. Edward's Crown",
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with St. Edward's Crown")
+      ?.options,
+  },
 };

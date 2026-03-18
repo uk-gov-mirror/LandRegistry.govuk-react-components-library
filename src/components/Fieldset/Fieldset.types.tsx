@@ -4,8 +4,7 @@ export interface LegendProps {
   isPageHeading?: boolean;
 }
 
-export interface FieldsetProps
-  extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
+export interface FieldsetProps extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
   className?: string;
   legend?: LegendProps;
   children: React.ReactNode;
