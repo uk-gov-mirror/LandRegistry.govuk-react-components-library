@@ -49,7 +49,7 @@ The Components includes:
 - [InsetText](./src/components/InsetText/InsetText.tsx)
 - [Label](./src/components/Label/Label.tsx)
 - [NotificationBanner](./src/components/NotificationBanner/NotificationBanner.tsx)
-- [Pagination](./src/components/Pagination/Pagination.tsx)
+- [Pagination](./src/components/Pagination/Pagination.tsx) — see [migration guide](#pagination-migration) if upgrading from v1.0.3 or earlier
 - [Panel](./src/components/Panel/Panel.tsx)
 - [PasswordInput](./src/components/PasswordInput/PasswordInput.tsx) `👈🏽`
 - [PhaseBanner](./src/components/PhaseBanner/PhaseBanner.tsx)
@@ -400,6 +400,215 @@ or in html
 ```
 
 </details>
+
+## Pagination migration
+
+The `Pagination` component API changed in v1.1.0. The previous API was computation-driven — you supplied raw counts and the component calculated the page range internally. The new API is render-driven: you supply the exact items to display, mirroring the [GOV.UK Design System pagination fixture shape](https://design-system.service.gov.uk/components/pagination/). This means the rendered HTML matches the Design System exactly and consumers have full control over what is shown.
+
+<details>
+  <summary>Basic numbered pagination</summary>
+
+**Before (v1.0.3 and earlier)**
+
+```jsx
+import { Pagination } from "@hmlr/govuk-react-components-library";
+
+<Pagination
+  onPageChange={setPage}
+  currentPage={2}
+  totalCount={75}
+  pageSize={25}
+/>;
+```
+
+**After (v1.1.0+)**
+
+```jsx
+import { Pagination } from "@hmlr/govuk-react-components-library";
+
+<Pagination
+  previous={{ href: "/page/1" }}
+  next={{ href: "/page/3" }}
+  items={[
+    { number: 1, href: "/page/1" },
+    { number: 2, href: "/page/2", current: true },
+    { number: 3, href: "/page/3" },
+  ]}
+/>;
+```
+
+</details>
+
+<details>
+  <summary>First page (no previous link)</summary>
+
+**Before**
+
+```jsx
+<Pagination
+  onPageChange={setPage}
+  currentPage={1}
+  totalCount={75}
+  pageSize={25}
+/>
+```
+
+**After** — omit `previous`, the component renders no previous link
+
+```jsx
+<Pagination
+  next={{ href: "/page/2" }}
+  items={[
+    { number: 1, href: "/page/1", current: true },
+    { number: 2, href: "/page/2" },
+    { number: 3, href: "/page/3" },
+  ]}
+/>
+```
+
+</details>
+
+<details>
+  <summary>Many pages with ellipsis</summary>
+
+**Before**
+
+```jsx
+<Pagination
+  onPageChange={setPage}
+  currentPage={10}
+  totalCount={400}
+  pageSize={10}
+  siblingCount={1}
+/>
+```
+
+**After** — ellipsis positions are explicit via `{ ellipsis: true }` items
+
+```jsx
+<Pagination
+  previous={{ href: "/page/9" }}
+  next={{ href: "/page/11" }}
+  items={[
+    { number: 1, href: "/page/1" },
+    { ellipsis: true },
+    { number: 9, href: "/page/9" },
+    { number: 10, href: "/page/10", current: true },
+    { number: 11, href: "/page/11" },
+    { ellipsis: true },
+    { number: 40, href: "/page/40" },
+  ]}
+/>
+```
+
+</details>
+
+<details>
+  <summary>Previous / next only with labels (block layout)</summary>
+
+**Before**
+
+```jsx
+<Pagination
+  onPageChange={setPage}
+  currentPage={2}
+  totalCount={50}
+  pageSize={25}
+  previousName="Previous page"
+  nextName="Next page"
+  previousChildren={
+    <span className="govuk-pagination__link-label">Paying VAT and duty</span>
+  }
+  nextChildren={
+    <span className="govuk-pagination__link-label">
+      Registering an imported vehicle
+    </span>
+  }
+/>
+```
+
+**After** — omitting `items` automatically applies `govuk-pagination--block` layout
+
+```jsx
+<Pagination
+  previous={{
+    href: "/page/1",
+    children: "Previous page",
+    labelText: "Paying VAT and duty",
+  }}
+  next={{
+    href: "/page/3",
+    children: "Next page",
+    labelText: "Registering an imported vehicle",
+  }}
+/>
+```
+
+</details>
+
+<details>
+  <summary>Computing items dynamically with UsePagination</summary>
+
+If your page data is calculated at runtime, `UsePagination` is still available as a standalone hook. Call it yourself and map the result to the `items` format:
+
+```jsx
+import {
+  Pagination,
+  UsePagination,
+  DOTS,
+} from "@hmlr/govuk-react-components-library";
+
+function SearchResults({ totalCount, pageSize, currentPage, onPageChange }) {
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  const items = UsePagination({
+    totalCount,
+    pageSize,
+    siblingCount: 1,
+    currentPage,
+  })?.map((entry) =>
+    entry === DOTS
+      ? { ellipsis: true }
+      : {
+          number: entry,
+          href: `/results?page=${entry}`,
+          current: entry === currentPage,
+        },
+  );
+
+  return (
+    <Pagination
+      previous={
+        currentPage > 1
+          ? { href: `/results?page=${currentPage - 1}` }
+          : undefined
+      }
+      next={
+        currentPage < totalPages
+          ? { href: `/results?page=${currentPage + 1}` }
+          : undefined
+      }
+      items={items}
+    />
+  );
+}
+```
+
+</details>
+
+### Removed props
+
+| Removed prop       | Replacement                                                   |
+| ------------------ | ------------------------------------------------------------- |
+| `onPageChange`     | Handle navigation via `href` on `previous` / `next` / `items` |
+| `currentPage`      | Set `current: true` on the relevant item in `items`           |
+| `totalCount`       | Not needed — pass items directly                              |
+| `pageSize`         | Not needed — pass items directly                              |
+| `siblingCount`     | Not needed — control ellipsis placement via `items`           |
+| `previousName`     | `previous.children`                                           |
+| `nextName`         | `next.children`                                               |
+| `previousChildren` | `previous.labelText`                                          |
+| `nextChildren`     | `next.labelText`                                              |
 
 ## Usage
 

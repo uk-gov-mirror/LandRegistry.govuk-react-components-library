@@ -99,6 +99,23 @@ const FIXTURE_NAME_OVERRIDES = {
 const CUSTOM_CONFIG = {};
 
 // ---------------------------------------------------------------------------
+// Generation skip list
+//
+// Add a component folder name here when its stories are hand-authored and
+// must never be overwritten by this script.
+//
+// Why a component ends up here:
+//   The govuk-frontend fixture props are designed for the server-side Nunjucks
+//   template and don't map to the React component's API.  Feeding them through
+//   extractShownFixtures produces undefined/NaN values at runtime.
+//   Hand-authored stories use the real React props directly instead.
+// ---------------------------------------------------------------------------
+const GENERATION_SKIP = new Set([
+  // Add component folder names here if their stories must be hand-authored.
+  // See comment block above for guidance on when this is needed.
+]);
+
+// ---------------------------------------------------------------------------
 // Config-file auto-detection
 //
 // If a component folder contains {Component}.config.ts or .config.tsx the
@@ -192,6 +209,12 @@ function toPascalCase(kebab) {
     .join("");
 }
 
+/** "file-upload" → "File upload"  |  "cookie-banner" → "Cookie banner" */
+function toTitleLabel(kebab) {
+  const words = kebab.replace(/-/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 function resolveFixtureName(componentName) {
   return FIXTURE_NAME_OVERRIDES[componentName] ?? toKebabCase(componentName);
 }
@@ -274,7 +297,7 @@ function generateFile(componentName, visibleFixtures) {
     custom?.extraImports ?? null,
     custom?.extraSetup ?? null,
     `const meta: Meta<typeof ${componentName}> = {`,
-    `  title: "GOVUK Design System/${componentName}",`,
+    `  title: "GOVUK Design System/${toTitleLabel(fixtureName)}",`,
     `  component: ${componentName},`,
     `  decorators: [${decorator}],`,
     `  tags: ["autodocs"],`,
@@ -319,6 +342,14 @@ const notImplemented = govukComponentKebabs.filter(
 const results = { generated: [], skipped: [], noFixtures: [] };
 
 for (const componentName of srcComponentNames) {
+  if (GENERATION_SKIP.has(componentName)) {
+    results.skipped.push({
+      componentName,
+      reason: "hand-authored stories (GENERATION_SKIP)",
+    });
+    continue;
+  }
+
   const fixtures = getVisibleFixtures(componentName);
   const fixtureName = resolveFixtureName(componentName);
 

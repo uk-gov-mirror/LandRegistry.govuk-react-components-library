@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/error-message/fixture
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof ErrorMessage> = {
-  title: "GOVUK Design System/ErrorMessage",
+  title: "GOVUK Design System/Error message",
   component: ErrorMessage,
   decorators: [(Story) => {
       return <Story />;

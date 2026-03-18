@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/LandRegistry/govuk-react-components-library/compare/v1.0.3...v1.1.0) (2026-03-18)
+
+### Features
+
+- update pagination to align with govuk-frontend, document for migration and stories ([d45d61b](https://github.com/LandRegistry/govuk-react-components-library/commit/d45d61b3cf92da4e2418736c1d075467f3fcf91f))
+- upgrade storybook and upgrade packages and add exit-this-page and password input ([702afa8](https://github.com/LandRegistry/govuk-react-components-library/commit/702afa8c172e9dfa00376ac52288ba8413d0888d))
+
 ### [1.0.3](https://github.com/LandRegistry/govuk-react-components-library/compare/v1.0.2...v1.0.3) (2025-10-10)
 
 ### Features

@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/service-navigation/fi
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof ServiceNavigation> = {
-  title: "GOVUK Design System/ServiceNavigation",
+  title: "GOVUK Design System/Service navigation",
   component: ServiceNavigation,
   decorators: [(Story) => {
       return <Story />;

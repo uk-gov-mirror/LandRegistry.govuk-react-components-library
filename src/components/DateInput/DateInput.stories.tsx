@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/date-input/fixtures.j
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof DateInput> = {
-  title: "GOVUK Design System/DateInput",
+  title: "GOVUK Design System/Date input",
   component: DateInput,
   decorators: [(Story) => {
       return <Story />;

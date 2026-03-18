@@ -13,7 +13,7 @@ import { ConfigureOverallNotificationBanner } from "./NotificationBanner.config"
 
 let configured = false;
 const meta: Meta<typeof NotificationBanner> = {
-  title: "GOVUK Design System/NotificationBanner",
+  title: "GOVUK Design System/Notification banner",
   component: NotificationBanner,
   decorators: [(Story, { parameters }) => {
       React.useEffect(() => {

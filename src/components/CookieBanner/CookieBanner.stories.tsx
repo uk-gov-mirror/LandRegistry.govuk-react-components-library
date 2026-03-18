@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/cookie-banner/fixture
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof CookieBanner> = {
-  title: "GOVUK Design System/CookieBanner",
+  title: "GOVUK Design System/Cookie banner",
   component: CookieBanner,
   decorators: [(Story) => {
       return <Story />;

@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/phase-banner/fixtures
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof PhaseBanner> = {
-  title: "GOVUK Design System/PhaseBanner",
+  title: "GOVUK Design System/Phase banner",
   component: PhaseBanner,
   decorators: [(Story) => {
       return <Story />;

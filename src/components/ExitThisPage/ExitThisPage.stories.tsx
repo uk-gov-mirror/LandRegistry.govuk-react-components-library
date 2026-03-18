@@ -13,7 +13,7 @@ import { ConfigureOverallExitThisPage } from "./ExitThisPage.config";
 
 let configured = false;
 const meta: Meta<typeof ExitThisPage> = {
-  title: "GOVUK Design System/ExitThisPage",
+  title: "GOVUK Design System/Exit this page",
   component: ExitThisPage,
   decorators: [(Story, { parameters }) => {
       React.useEffect(() => {

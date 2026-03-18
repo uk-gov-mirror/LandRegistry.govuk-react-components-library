@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/back-link/fixtures.js
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof BackLink> = {
-  title: "GOVUK Design System/BackLink",
+  title: "GOVUK Design System/Back link",
   component: BackLink,
   decorators: [(Story) => {
       return <Story />;

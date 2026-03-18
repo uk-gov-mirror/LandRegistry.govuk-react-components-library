@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/file-upload/fixtures.
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof FileUpload> = {
-  title: "GOVUK Design System/FileUpload",
+  title: "GOVUK Design System/File upload",
   component: FileUpload,
   decorators: [(Story) => {
       return <Story />;

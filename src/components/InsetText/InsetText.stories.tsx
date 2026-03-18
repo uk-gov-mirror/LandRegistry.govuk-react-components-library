@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/inset-text/fixtures.j
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof InsetText> = {
-  title: "GOVUK Design System/InsetText",
+  title: "GOVUK Design System/Inset text",
   component: InsetText,
   decorators: [(Story) => {
       return <Story />;

@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/summary-list/fixtures
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof SummaryList> = {
-  title: "GOVUK Design System/SummaryList",
+  title: "GOVUK Design System/Summary list",
   component: SummaryList,
   decorators: [(Story) => {
       return <Story />;

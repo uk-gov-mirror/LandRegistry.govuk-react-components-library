@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/warning-text/fixtures
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof WarningText> = {
-  title: "GOVUK Design System/WarningText",
+  title: "GOVUK Design System/Warning text",
   component: WarningText,
   decorators: [(Story) => {
       return <Story />;

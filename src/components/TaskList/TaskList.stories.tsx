@@ -10,7 +10,7 @@ import fixtures from "govuk-frontend/dist/govuk/components/task-list/fixtures.js
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof TaskList> = {
-  title: "GOVUK Design System/TaskList",
+  title: "GOVUK Design System/Task list",
   component: TaskList,
   decorators: [(Story) => {
       return <Story />;

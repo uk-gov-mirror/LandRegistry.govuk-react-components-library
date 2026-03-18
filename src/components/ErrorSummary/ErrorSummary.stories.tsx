@@ -13,7 +13,7 @@ import { ConfigureOverallErrorSummary } from "./ErrorSummary.config";
 
 let configured = false;
 const meta: Meta<typeof ErrorSummary> = {
-  title: "GOVUK Design System/ErrorSummary",
+  title: "GOVUK Design System/Error summary",
   component: ErrorSummary,
   decorators: [(Story, { parameters }) => {
       React.useEffect(() => {

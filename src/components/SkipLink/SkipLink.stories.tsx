@@ -13,7 +13,7 @@ import { ConfigureOverallSkipLink } from "./SkipLink.config";
 
 let configured = false;
 const meta: Meta<typeof SkipLink> = {
-  title: "GOVUK Design System/SkipLink",
+  title: "GOVUK Design System/Skip link",
   component: SkipLink,
   decorators: [(Story, { parameters }) => {
       React.useEffect(() => {

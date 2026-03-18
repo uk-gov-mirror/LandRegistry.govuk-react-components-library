@@ -13,7 +13,7 @@ import { ConfigureOverallCharacterCount } from "./CharacterCount.config";
 
 let configured = false;
 const meta: Meta<typeof CharacterCount> = {
-  title: "GOVUK Design System/CharacterCount",
+  title: "GOVUK Design System/Character count",
   component: CharacterCount,
   decorators: [(Story, { parameters }) => {
       React.useEffect(() => {

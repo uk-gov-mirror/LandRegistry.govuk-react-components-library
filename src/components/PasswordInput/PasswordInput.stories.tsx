@@ -13,7 +13,7 @@ import { ConfigureOverallPasswordInput } from "./PasswordInput.config";
 
 let configured = false;
 const meta: Meta<typeof PasswordInput> = {
-  title: "GOVUK Design System/PasswordInput",
+  title: "GOVUK Design System/Password input",
   component: PasswordInput,
   decorators: [(Story, { parameters }) => {
       React.useEffect(() => {
