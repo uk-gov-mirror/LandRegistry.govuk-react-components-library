@@ -42,14 +42,6 @@ export const Default: Story = {
   args: { ...examplesFromFixtures.find((f) => f.name === "default")?.options },
 };
 
-export const WithServiceName: Story = {
-  name: "with service name",
-  args: {
-    ...examplesFromFixtures.find((f) => f.name === "with service name")
-      ?.options,
-  },
-};
-
 export const WithProductName: Story = {
   name: "with product name",
   args: { ...examplesFromFixtures.find((f) => f.name === "with product name")?.options },
