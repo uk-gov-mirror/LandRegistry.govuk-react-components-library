@@ -12,9 +12,11 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof Pagination> = {
   title: "GOVUK Design System/Pagination",
   component: Pagination,
-  decorators: [(Story) => {
+  decorators: [
+    (Story) => {
       return <Story />;
-    }],
+    },
+  ],
   tags: ["autodocs"],
 };
 
@@ -23,7 +25,8 @@ type Story = StoryObj<typeof Pagination>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> =
+  extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -32,45 +35,71 @@ export const Default: Story = {
 
 export const WithCustomLinkAndItemText: Story = {
   name: "with custom link and item text",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with custom link and item text")?.options },
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with custom link and item text",
+    )?.options,
+  },
 };
 
 export const WithManyPages: Story = {
   name: "with many pages",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with many pages")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with many pages")?.options,
+  },
 };
 
 export const FirstPage: Story = {
   name: "first page",
-  args: { ...examplesFromFixtures.find((f) => f.name === "first page")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "first page")?.options,
+  },
 };
 
 export const LastPage: Story = {
   name: "last page",
-  args: { ...examplesFromFixtures.find((f) => f.name === "last page")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "last page")?.options,
+  },
 };
 
 export const WithPrevAndNextOnly: Story = {
   name: "with prev and next only",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with prev and next only")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with prev and next only")
+      ?.options,
+  },
 };
 
 export const WithPrevAndNextOnlyAndLabels: Story = {
   name: "with prev and next only and labels",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with prev and next only and labels")?.options },
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with prev and next only and labels",
+    )?.options,
+  },
 };
 
 export const WithPrevAndNextOnlyAndVeryLongLabels: Story = {
   name: "with prev and next only and very long labels",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with prev and next only and very long labels")?.options },
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with prev and next only and very long labels",
+    )?.options,
+  },
 };
 
 export const WithPreviousOnly: Story = {
   name: "with previous only",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with previous only")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with previous only")
+      ?.options,
+  },
 };
 
 export const WithNextOnly: Story = {
   name: "with next only",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with next only")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with next only")?.options,
+  },
 };

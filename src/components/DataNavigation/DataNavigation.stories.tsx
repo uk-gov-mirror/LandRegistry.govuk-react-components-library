@@ -6,13 +6,40 @@ import DataNavigation from "./DataNavigation";
 import { action } from "storybook/actions";
 
 export default {
-  title: "ReactComponentLibrary/Data navigation",
+  title: "React Component Library/Data navigation",
   component: DataNavigation,
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   args: { setDataFocus: action("setDataFocus") },
+  argTypes: {
+    buttonColour: {
+      control: "color",
+      description:
+        "Button background colour. Omit to use govuk-functional-colour('brand') (#1d70b8).",
+    },
+    buttonTextColour: {
+      control: "color",
+      description:
+        "Button text colour. Omit to use govuk-colour('white') (#ffffff).",
+    },
+    buttonShadowColour: {
+      control: "color",
+      description:
+        "Button shadow colour. Omit to use govuk-colour('black') (#0b0c0c).",
+    },
+    buttonHoverColour: {
+      control: "color",
+      description:
+        "Button hover background colour. Omit to use govuk-functional-colour('focus') (#ffdd00).",
+    },
+    buttonHoverTextColour: {
+      control: "color",
+      description:
+        "Button hover text colour. Omit to use govuk-functional-colour('focus-text') (#0b0c0c).",
+    },
+  },
 } as Meta<typeof DataNavigation>;
 
+// No colour props — uses govuk-frontend SCSS defaults throughout
 export const DefaultExample = {
   args: {
     dataId: 8,
@@ -44,5 +71,31 @@ export const DisabledNext = {
     dataId: 11,
     dataDescription: "November 2004",
     nextCondition: true,
+  },
+};
+
+// Legacy hardcoded colours from the original CardColumn — shown for reference
+export const LegacyColours = {
+  args: {
+    dataId: 8,
+    dataDescription: "Data Properties",
+    buttonColour: "#005ea5",
+    buttonTextColour: "#ffffff",
+    buttonShadowColour: "#003078",
+    buttonHoverColour: "#005ea5",
+    buttonHoverTextColour: "#f8f8f8",
+  },
+};
+
+// Per-instance custom brand colour — GOV.UK green (success colour)
+export const CustomColours = {
+  args: {
+    dataId: 8,
+    dataDescription: "Data Properties",
+    buttonColour: "#0f7a52",
+    buttonTextColour: "#ffffff",
+    buttonShadowColour: "#083d29",
+    buttonHoverColour: "#ffdd00",
+    buttonHoverTextColour: "#0b0c0c",
   },
 };

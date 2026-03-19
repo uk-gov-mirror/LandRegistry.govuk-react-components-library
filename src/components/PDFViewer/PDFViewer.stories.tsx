@@ -9,7 +9,7 @@ import {
 import { PDFViewerBackend } from "./PDFViewerBackend";
 
 const meta: Meta<typeof PDFViewer> = {
-  title: "ReactComponentLibrary/PDF viewer",
+  title: "React Component Library/PDF viewer",
   component: PDFViewer,
   tags: ["autodocs"],
 };

@@ -9,7 +9,7 @@ import { ConfigureOverallErrorSummary } from "../ErrorSummary";
 let configured = false;
 
 export default {
-  title: "ReactComponentLibrary/Problem with service",
+  title: "React Component Library/Problem with service",
   component: ProblemWithService,
   decorators: [
     (Story, { parameters }) => {

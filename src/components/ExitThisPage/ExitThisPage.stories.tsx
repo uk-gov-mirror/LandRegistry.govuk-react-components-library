@@ -15,9 +15,12 @@ let configured = false;
 const meta: Meta<typeof ExitThisPage> = {
   title: "GOVUK Design System/Exit this page",
   component: ExitThisPage,
-  decorators: [(Story, { parameters }) => {
+  decorators: [
+    (Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-exit-this-page--docs");
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-exit-this-page--docs",
+        );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallExitThisPage();
           configured = true;
@@ -26,7 +29,8 @@ const meta: Meta<typeof ExitThisPage> = {
         }
       }, []);
       return <Story />;
-    }],
+    },
+  ],
   tags: ["autodocs"],
 };
 
@@ -35,7 +39,8 @@ type Story = StoryObj<typeof ExitThisPage>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> =
+  extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",

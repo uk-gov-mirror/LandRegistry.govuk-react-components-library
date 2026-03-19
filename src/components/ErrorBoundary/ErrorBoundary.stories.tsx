@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import ErrorBoundary from "./ErrorBoundary";
 
 const meta: Meta<typeof ErrorBoundary> = {
-  title: "ReactComponentLibrary/Error boundary",
+  title: "React Component Library/Error boundary",
   component: ErrorBoundary,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],

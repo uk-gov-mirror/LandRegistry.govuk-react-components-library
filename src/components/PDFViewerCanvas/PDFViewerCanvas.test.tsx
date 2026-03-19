@@ -117,7 +117,6 @@ describe("PDFViewerCanvas", () => {
     const mockNavigation = screen.getByTestId("difference-navigation");
     expect(mockNavigation).toBeInTheDocument();
 
-    // Check that DifferenceNavigation was called with the correct props
     expect(DifferenceNavigation).toHaveBeenCalled();
     const callArgs = (DifferenceNavigation as jest.Mock).mock.calls[0][0];
     expect(callArgs).toHaveProperty("differenceId");
@@ -160,5 +159,50 @@ describe("PDFViewerCanvas", () => {
     expect(
       screen.getByText(`There was an error loading the PDF document.`),
     ).toBeInTheDocument();
+  });
+
+  test("passes colour props through to DifferenceNavigation", async () => {
+    await act(async () => {
+      render(
+        <PDFViewerCanvas
+          src="test.pdf"
+          documentName="Test PDF"
+          showNavigation
+          buttonColour="#0f7a52"
+          buttonTextColour="#ffffff"
+          buttonShadowColour="#083d29"
+          buttonHoverColour="#ffdd00"
+          buttonHoverTextColour="#0b0c0c"
+        />,
+      );
+    });
+
+    expect(DifferenceNavigation).toHaveBeenCalled();
+    const callArgs = (DifferenceNavigation as jest.Mock).mock.calls[0][0];
+    expect(callArgs).toHaveProperty("buttonColour", "#0f7a52");
+    expect(callArgs).toHaveProperty("buttonTextColour", "#ffffff");
+    expect(callArgs).toHaveProperty("buttonShadowColour", "#083d29");
+    expect(callArgs).toHaveProperty("buttonHoverColour", "#ffdd00");
+    expect(callArgs).toHaveProperty("buttonHoverTextColour", "#0b0c0c");
+  });
+
+  test("does not pass colour props to DifferenceNavigation when none are provided", async () => {
+    await act(async () => {
+      render(
+        <PDFViewerCanvas
+          src="test.pdf"
+          documentName="Test PDF"
+          showNavigation
+        />,
+      );
+    });
+
+    expect(DifferenceNavigation).toHaveBeenCalled();
+    const callArgs = (DifferenceNavigation as jest.Mock).mock.calls[0][0];
+    expect(callArgs.buttonColour).toBeUndefined();
+    expect(callArgs.buttonTextColour).toBeUndefined();
+    expect(callArgs.buttonShadowColour).toBeUndefined();
+    expect(callArgs.buttonHoverColour).toBeUndefined();
+    expect(callArgs.buttonHoverTextColour).toBeUndefined();
   });
 });

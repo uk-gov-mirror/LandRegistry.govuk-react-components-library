@@ -15,9 +15,12 @@ let configured = false;
 const meta: Meta<typeof SkipLink> = {
   title: "GOVUK Design System/Skip link",
   component: SkipLink,
-  decorators: [(Story, { parameters }) => {
+  decorators: [
+    (Story, { parameters }) => {
       React.useEffect(() => {
-        const isDocsMode = window.location.search.includes("path=/docs/govuk-design-system-skip-link--docs");
+        const isDocsMode = window.location.search.includes(
+          "path=/docs/govuk-design-system-skip-link--docs",
+        );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
           ConfigureOverallSkipLink();
           configured = true;
@@ -26,7 +29,8 @@ const meta: Meta<typeof SkipLink> = {
         }
       }, []);
       return <Story />;
-    }],
+    },
+  ],
   tags: ["autodocs"],
 };
 
@@ -35,7 +39,8 @@ type Story = StoryObj<typeof SkipLink>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> =
+  extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -44,5 +49,7 @@ export const Default: Story = {
 
 export const WithFocus: Story = {
   name: "with focus",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with focus")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with focus")?.options,
+  },
 };

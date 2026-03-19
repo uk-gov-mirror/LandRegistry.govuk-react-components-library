@@ -21,7 +21,7 @@ const OtherPage: React.FC = () => {
 };
 
 export default {
-  title: "ReactComponentLibrary/Landing",
+  title: "React Component Library/Landing",
   component: Landing,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],

@@ -1,28 +1,49 @@
 // src/components/CardColumn/CardColumn.scss
+//  --
+// Colours use CSS custom properties with govuk-frontend helper fallbacks.
+//  --
+// The --card-text-color and --card-hover-color custom properties are set
+// inline on the <Card> element when the textColor / hoverColor props are
+// passed. When they are absent, var() falls back to the govuk-frontend
+// functional colour / palette helpers so the govuk theme remains the default.
+//  --
+// govuk-functional-colour() tokens (design-system.service.gov.uk/styles/colour/):
+//   "brand"       → #1d70b8  — GOV.UK brand blue
+//   "link"        → #1a65a6  — standard link colour
+//   "link-hover"  → #0f385c  — link hover colour
+//   "focus"       → #ffdd00  — focus/active highlight
+//   "focus-text"  → #0b0c0c  — text on focus yellow background
+//  --
+// govuk-colour() palette values:
+//   govuk-colour("black")  → #0b0c0c  — header bar background
+//   govuk-colour("white")  → #ffffff
+
+@use "~govuk-frontend/dist/govuk/helpers/colour" as *;
 @use "~bootstrap/scss/bootstrap";
 
 .card-link {
-  color: #1d70b8;
-}
+  color: var(--card-text-color, #{govuk-functional-colour("link")});
 
-.card-link :hover {
-  color: #003078;
-  border-color: #fd0;
+  &:hover {
+    color: var(--card-hover-color, #{govuk-functional-colour("link-hover")});
+    border-color: govuk-functional-colour("focus");
+  }
 }
 
 .card-header {
   padding-bottom: 65px;
-  color: #005ea5;
+  color: var(--card-text-color, #{govuk-functional-colour("brand")});
+  transition-duration: 0.3s;
 
   &:hover {
-    color: #f8f8f8;
-    background-color: #005ea5;
-    transition-duration: 0.3s;
+    color: govuk-colour("white");
+    background-color: var(--card-hover-color, #{govuk-colour("black")});
   }
 
   &:active {
-    background-color: gold;
-    border-bottom: #000 groove;
+    color: govuk-functional-colour("focus-text");
+    background-color: govuk-functional-colour("focus");
+    border-bottom: govuk-functional-colour("focus-text") groove;
     transition: ease-in-out;
   }
 }

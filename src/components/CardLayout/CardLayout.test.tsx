@@ -45,4 +45,77 @@ describe("Card Layout component", () => {
       ).toContain(column.link);
     });
   });
+
+  test("does not set colour CSS custom properties on cards when no colour props are provided", () => {
+    render(
+      <BrowserRouter>
+        <CardLayout {...data} />
+      </BrowserRouter>,
+    );
+    data.cardColumns.forEach((column: CardColumnProps) => {
+      const card = screen.getByText(column.header).closest(".card");
+      expect(card?.getAttribute("style")).toBeNull();
+    });
+  });
+
+  test("passes textColor and hoverColor down to every CardColumn", () => {
+    const colouredData: CardLayoutProps = {
+      cardColumns: data.cardColumns.map((card) => ({
+        ...card,
+        textColor: "#4c2c92",
+        hoverColor: "#4c2c92",
+      })),
+    };
+
+    render(
+      <BrowserRouter>
+        <CardLayout {...colouredData} />
+      </BrowserRouter>,
+    );
+
+    colouredData.cardColumns.forEach((column: CardColumnProps) => {
+      const card = screen.getByText(column.header).closest(".card");
+      expect(card?.getAttribute("style")).toContain(
+        "--card-text-color: #4c2c92",
+      );
+      expect(card?.getAttribute("style")).toContain(
+        "--card-hover-color: #4c2c92",
+      );
+    });
+  });
+
+  test("passes different colours to individual CardColumns independently", () => {
+    const mixedData: CardLayoutProps = {
+      cardColumns: [
+        { ...data.cardColumns[0], textColor: "#005ea5", hoverColor: "#005ea5" },
+        { ...data.cardColumns[1], textColor: "#4c2c92", hoverColor: "#4c2c92" },
+        { ...data.cardColumns[2] },
+      ],
+    };
+
+    render(
+      <BrowserRouter>
+        <CardLayout {...mixedData} />
+      </BrowserRouter>,
+    );
+
+    const firstCard = screen
+      .getByText(mixedData.cardColumns[0].header)
+      .closest(".card");
+    expect(firstCard?.getAttribute("style")).toContain(
+      "--card-text-color: #005ea5",
+    );
+
+    const secondCard = screen
+      .getByText(mixedData.cardColumns[1].header)
+      .closest(".card");
+    expect(secondCard?.getAttribute("style")).toContain(
+      "--card-text-color: #4c2c92",
+    );
+
+    const thirdCard = screen
+      .getByText(mixedData.cardColumns[2].header)
+      .closest(".card");
+    expect(thirdCard?.getAttribute("style")).toBeNull();
+  });
 });

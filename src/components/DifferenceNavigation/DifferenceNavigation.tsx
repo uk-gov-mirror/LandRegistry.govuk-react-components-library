@@ -10,6 +10,11 @@ const DifferenceNavigation: React.FC<DifferenceNavigationProps> = ({
   totalDifferences,
   keyword = "variation",
   plural = "variations",
+  buttonColour,
+  buttonTextColour,
+  buttonShadowColour,
+  buttonHoverColour,
+  buttonHoverTextColour,
 }) => {
   if (totalDifferences === 0) {
     return (
@@ -18,6 +23,28 @@ const DifferenceNavigation: React.FC<DifferenceNavigationProps> = ({
       </p>
     );
   }
+
+  // CSS custom properties set directly on each <button> element via Button's
+  // ...attributes spread, so they sit on the same element that
+  // .app-difference-navigation-button targets — no inheritance from a parent
+  // div needed. Only written when a prop is explicitly provided.
+  const inlineVars = {
+    ...(buttonColour && { "--diff-nav-button-colour": buttonColour }),
+    ...(buttonTextColour && {
+      "--diff-nav-button-text-colour": buttonTextColour,
+    }),
+    ...(buttonShadowColour && {
+      "--diff-nav-button-shadow-colour": buttonShadowColour,
+    }),
+    ...(buttonHoverColour && {
+      "--diff-nav-button-hover-colour": buttonHoverColour,
+    }),
+    ...(buttonHoverTextColour && {
+      "--diff-nav-button-hover-text-colour": buttonHoverTextColour,
+    }),
+  } as React.CSSProperties;
+
+  const hasInlineVars = Object.keys(inlineVars).length > 0;
 
   const isPreviousDisabled = differenceId <= 1;
   const isNextDisabled = differenceId === totalDifferences;
@@ -28,7 +55,14 @@ const DifferenceNavigation: React.FC<DifferenceNavigationProps> = ({
     disabled: boolean,
     content: React.ReactNode,
   ) => (
-    <Button id={id} onClick={onClick} data-testid={id} disabled={disabled}>
+    <Button
+      id={id}
+      onClick={onClick}
+      data-testid={id}
+      disabled={disabled}
+      className="app-difference-navigation-button"
+      {...(hasInlineVars && { style: inlineVars })}
+    >
       {content}
     </Button>
   );
@@ -63,6 +97,7 @@ const DifferenceNavigation: React.FC<DifferenceNavigationProps> = ({
           )}
         </div>
       </div>
+
       <div className="govuk-grid-column-one-third">
         <Label className="govuk-!-text-align-centre">
           {titleCase(keyword)} {differenceId} of {totalDifferences}

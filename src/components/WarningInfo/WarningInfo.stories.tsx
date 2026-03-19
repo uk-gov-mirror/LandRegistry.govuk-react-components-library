@@ -6,7 +6,7 @@ import { MemoryRouter, Routes } from "react-router";
 import { Route } from "react-router-dom";
 
 export default {
-  title: "ReactComponentLibrary/Warning info",
+  title: "React Component Library/Warning info",
   component: WarningInfo,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],

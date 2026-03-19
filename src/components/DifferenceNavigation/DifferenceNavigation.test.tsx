@@ -16,13 +16,10 @@ describe("DifferenceNavigation Component", () => {
       />,
     );
 
-    // Check that the previous and next buttons are rendered
     const previousButton = screen.getByTestId("previous-change");
     const nextButton = screen.getByTestId("next-change");
     expect(previousButton).toBeInTheDocument();
     expect(nextButton).toBeInTheDocument();
-
-    // Check the difference info
     expect(screen.getByText("Change 2 of 5")).toBeInTheDocument();
   });
 
@@ -34,9 +31,7 @@ describe("DifferenceNavigation Component", () => {
         totalDifferences={5}
       />,
     );
-
-    const previousButton = screen.getByTestId("previous-variation");
-    expect(previousButton).toBeDisabled();
+    expect(screen.getByTestId("previous-variation")).toBeDisabled();
   });
 
   test("disables next button on the last difference", () => {
@@ -47,9 +42,7 @@ describe("DifferenceNavigation Component", () => {
         totalDifferences={5}
       />,
     );
-
-    const nextButton = screen.getByTestId("next-variation");
-    expect(nextButton).toBeDisabled();
+    expect(screen.getByTestId("next-variation")).toBeDisabled();
   });
 
   test("calls setDifferenceFocus with the correct value on button click", () => {
@@ -61,13 +54,10 @@ describe("DifferenceNavigation Component", () => {
       />,
     );
 
-    const previousButton = screen.getByTestId("previous-variation");
-    const nextButton = screen.getByTestId("next-variation");
-
-    fireEvent.click(previousButton);
+    fireEvent.click(screen.getByTestId("previous-variation"));
     expect(mockSetDifferenceFocus).toHaveBeenCalledWith(2);
 
-    fireEvent.click(nextButton);
+    fireEvent.click(screen.getByTestId("next-variation"));
     expect(mockSetDifferenceFocus).toHaveBeenCalledWith(4);
   });
 
@@ -79,7 +69,98 @@ describe("DifferenceNavigation Component", () => {
         totalDifferences={0}
       />,
     );
-
     expect(screen.getByText("No variations found")).toBeInTheDocument();
+  });
+
+  test("applies app-difference-navigation-button class to both buttons", () => {
+    render(
+      <DifferenceNavigation
+        differenceId={2}
+        setDifferenceFocus={mockSetDifferenceFocus}
+        totalDifferences={5}
+      />,
+    );
+    expect(screen.getByTestId("previous-variation")).toHaveClass(
+      "app-difference-navigation-button",
+    );
+    expect(screen.getByTestId("next-variation")).toHaveClass(
+      "app-difference-navigation-button",
+    );
+  });
+
+  test("does not set a style attribute on buttons when no colour props are provided", () => {
+    render(
+      <DifferenceNavigation
+        differenceId={2}
+        setDifferenceFocus={mockSetDifferenceFocus}
+        totalDifferences={5}
+      />,
+    );
+    expect(
+      screen.getByTestId("previous-variation").getAttribute("style"),
+    ).toBeNull();
+    expect(
+      screen.getByTestId("next-variation").getAttribute("style"),
+    ).toBeNull();
+  });
+
+  test("sets --diff-nav-button-colour on both buttons when buttonColour is provided", () => {
+    render(
+      <DifferenceNavigation
+        differenceId={2}
+        setDifferenceFocus={mockSetDifferenceFocus}
+        totalDifferences={5}
+        buttonColour="#005ea5"
+      />,
+    );
+    expect(
+      screen.getByTestId("previous-variation").getAttribute("style"),
+    ).toContain("--diff-nav-button-colour: #005ea5");
+    expect(
+      screen.getByTestId("next-variation").getAttribute("style"),
+    ).toContain("--diff-nav-button-colour: #005ea5");
+  });
+
+  test("sets all colour custom properties on both buttons when all colour props are provided", () => {
+    render(
+      <DifferenceNavigation
+        differenceId={2}
+        setDifferenceFocus={mockSetDifferenceFocus}
+        totalDifferences={5}
+        buttonColour="#0f7a52"
+        buttonTextColour="#ffffff"
+        buttonShadowColour="#083d29"
+        buttonHoverColour="#ffdd00"
+        buttonHoverTextColour="#0b0c0c"
+      />,
+    );
+
+    ["previous-variation", "next-variation"].forEach((testId) => {
+      const style = screen.getByTestId(testId).getAttribute("style");
+      expect(style).toContain("--diff-nav-button-colour: #0f7a52");
+      expect(style).toContain("--diff-nav-button-text-colour: #ffffff");
+      expect(style).toContain("--diff-nav-button-shadow-colour: #083d29");
+      expect(style).toContain("--diff-nav-button-hover-colour: #ffdd00");
+      expect(style).toContain("--diff-nav-button-hover-text-colour: #0b0c0c");
+    });
+  });
+
+  test("colour props work correctly with a custom keyword", () => {
+    render(
+      <DifferenceNavigation
+        differenceId={2}
+        setDifferenceFocus={mockSetDifferenceFocus}
+        totalDifferences={5}
+        keyword="change"
+        plural="changes"
+        buttonColour="#4c2c92"
+      />,
+    );
+    expect(
+      screen.getByTestId("previous-change").getAttribute("style"),
+    ).toContain("--diff-nav-button-colour: #4c2c92");
+    expect(screen.getByTestId("next-change").getAttribute("style")).toContain(
+      "--diff-nav-button-colour: #4c2c92",
+    );
   });
 });

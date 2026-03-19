@@ -5,7 +5,7 @@ import { Meta } from "@storybook/react-vite";
 import NotFoundPage from "./NotFoundPage";
 
 export default {
-  title: "ReactComponentLibrary/Not found page",
+  title: "React Component Library/Not found page",
   component: NotFoundPage,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],

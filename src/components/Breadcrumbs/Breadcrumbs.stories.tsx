@@ -12,9 +12,11 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof Breadcrumbs> = {
   title: "GOVUK Design System/Breadcrumbs",
   component: Breadcrumbs,
-  decorators: [(Story) => {
+  decorators: [
+    (Story) => {
       return <Story />;
-    }],
+    },
+  ],
   tags: ["autodocs"],
 };
 
@@ -23,7 +25,8 @@ type Story = StoryObj<typeof Breadcrumbs>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> =
+  extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -32,22 +35,34 @@ export const Default: Story = {
 
 export const WithOneLevel: Story = {
   name: "with one level",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with one level")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with one level")?.options,
+  },
 };
 
 export const WithoutTheHomeSection: Story = {
   name: "without the home section",
-  args: { ...examplesFromFixtures.find((f) => f.name === "without the home section")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "without the home section")
+      ?.options,
+  },
 };
 
 export const WithLastBreadcrumbAsCurrentPage: Story = {
   name: "with last breadcrumb as current page",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with last breadcrumb as current page")?.options },
+  args: {
+    ...examplesFromFixtures.find(
+      (f) => f.name === "with last breadcrumb as current page",
+    )?.options,
+  },
 };
 
 export const WithCollapseOnMobile: Story = {
   name: "with collapse on mobile",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with collapse on mobile")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with collapse on mobile")
+      ?.options,
+  },
 };
 
 export const Inverse: Story = {

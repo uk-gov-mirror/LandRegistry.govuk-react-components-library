@@ -1,3 +1,19 @@
+// src/components/DifferenceNavigation/DifferenceNavigation.scss
+
+// Follows the same pattern as DataNavigation.scss.
+// Button colours are driven by CSS custom properties set directly on each
+// <button> element (via Button's ...attributes spread), with govuk-frontend
+// helper fallbacks so the GOV.UK theme applies by default.
+
+// govuk-functional-colour() tokens used:
+//   "brand"      → #1d70b8  — default button background
+//   "focus"      → #ffdd00  — hover background
+//   "focus-text" → #0b0c0c  — text on focus background
+
+// govuk-colour() values used:
+//   govuk-colour("white")  → #ffffff  — default button text
+//   govuk-colour("black")  → #0b0c0c  — default button shadow
+
 $govuk-images-path: "~govuk-frontend/dist/govuk/assets/images/";
 $govuk-fonts-path: "~govuk-frontend/dist/govuk/assets/fonts/";
 $govuk-assets-path: "~govuk-frontend/dist/govuk/assets/";
@@ -5,3 +21,30 @@ $govuk-assets-path: "~govuk-frontend/dist/govuk/assets/";
 @use "~govuk-frontend/dist/govuk/base";
 @use "~govuk-frontend/dist/govuk/core/index" as govuk-core;
 @use "~govuk-frontend/dist/govuk/objects/index" as govuk-objects;
+@use "~govuk-frontend/dist/govuk/helpers/colour" as *;
+
+.app-difference-navigation-button {
+  color: var(--diff-nav-button-text-colour, #{govuk-colour("white")});
+  background-color: var(
+    --diff-nav-button-colour,
+    #{govuk-functional-colour("brand")}
+  );
+  box-shadow: 0 2px 0
+    var(--diff-nav-button-shadow-colour, #{govuk-colour("black")});
+
+  &:hover {
+    color: var(
+      --diff-nav-button-hover-text-colour,
+      #{govuk-functional-colour("focus-text")}
+    );
+    background-color: var(
+      --diff-nav-button-hover-colour,
+      #{govuk-functional-colour("focus")}
+    );
+  }
+
+  &:focus {
+    color: govuk-functional-colour("focus-text");
+    background-color: govuk-functional-colour("focus");
+  }
+}

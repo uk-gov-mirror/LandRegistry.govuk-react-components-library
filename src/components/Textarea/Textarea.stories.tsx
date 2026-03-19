@@ -12,9 +12,11 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof Textarea> = {
   title: "GOVUK Design System/Textarea",
   component: Textarea,
-  decorators: [(Story) => {
+  decorators: [
+    (Story) => {
       return <Story />;
-    }],
+    },
+  ],
   tags: ["autodocs"],
 };
 
@@ -23,7 +25,8 @@ type Story = StoryObj<typeof Textarea>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> =
+  extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -32,25 +35,38 @@ export const Default: Story = {
 
 export const WithHint: Story = {
   name: "with hint",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with hint")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with hint")?.options,
+  },
 };
 
 export const WithErrorMessage: Story = {
   name: "with error message",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with error message")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with error message")
+      ?.options,
+  },
 };
 
 export const WithDefaultValue: Story = {
   name: "with default value",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with default value")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with default value")
+      ?.options,
+  },
 };
 
 export const WithCustomRows: Story = {
   name: "with custom rows",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with custom rows")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with custom rows")?.options,
+  },
 };
 
 export const WithLabelAsPageHeading: Story = {
   name: "with label as page heading",
-  args: { ...examplesFromFixtures.find((f) => f.name === "with label as page heading")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "with label as page heading")
+      ?.options,
+  },
 };

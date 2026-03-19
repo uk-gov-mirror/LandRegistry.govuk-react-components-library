@@ -1,3 +1,22 @@
+// src/components/DataNavigation/DataNavigation.scss
+
+// Button colours are driven by CSS custom properties set on the wrapper div,
+// with govuk-frontend helper fallbacks so the GOV.UK theme applies by default.
+
+// The .app-data-navigation-button modifier class opts buttons into the
+// custom colour system without touching the .govuk-button class itself,
+// following the GOV.UK Design System guidance on extending components:
+// https://design-system.service.gov.uk/get-started/extending-and-modifying-components/
+
+// govuk-functional-colour() tokens used:
+//   "brand"      → #1d70b8  — default button background
+//   "focus"      → #ffdd00  — focus/hover highlight
+//   "focus-text" → #0b0c0c  — text on focus background
+
+// govuk-colour() values used:
+//   govuk-colour("white")  → #ffffff  — button text colour
+//   govuk-colour("black")  → #0b0c0c  — button shadow colour
+
 $govuk-images-path: "~govuk-frontend/dist/govuk/assets/images/";
 $govuk-fonts-path: "~govuk-frontend/dist/govuk/assets/fonts/";
 $govuk-assets-path: "~govuk-frontend/dist/govuk/assets/";
@@ -5,3 +24,33 @@ $govuk-assets-path: "~govuk-frontend/dist/govuk/assets/";
 @use "~govuk-frontend/dist/govuk/base";
 @use "~govuk-frontend/dist/govuk/core/index" as govuk-core;
 @use "~govuk-frontend/dist/govuk/objects/index" as govuk-objects;
+@use "~govuk-frontend/dist/govuk/helpers/colour" as *;
+
+.app-data-navigation-button {
+  color: var(--data-nav-button-text-colour, #{govuk-colour("white")});
+  background-color: var(
+    --data-nav-button-colour,
+    #{govuk-functional-colour("brand")}
+  );
+
+  // Shadow is a darker shade of the button colour — using govuk-colour("black")
+  // as the fallback since we can't call govuk-shade() at runtime
+  box-shadow: 0 2px 0
+    var(--data-nav-button-shadow-colour, #{govuk-colour("black")});
+
+  &:hover {
+    color: var(
+      --data-nav-button-hover-text-colour,
+      #{govuk-functional-colour("focus-text")}
+    );
+    background-color: var(
+      --data-nav-button-hover-colour,
+      #{govuk-functional-colour("focus")}
+    );
+  }
+
+  &:focus {
+    color: govuk-functional-colour("focus-text");
+    background-color: govuk-functional-colour("focus");
+  }
+}

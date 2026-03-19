@@ -12,9 +12,11 @@ import { ComponentFixture } from "../../dynamics";
 const meta: Meta<typeof Tag> = {
   title: "GOVUK Design System/Tag",
   component: Tag,
-  decorators: [(Story) => {
+  decorators: [
+    (Story) => {
       return <Story />;
-    }],
+    },
+  ],
   tags: ["autodocs"],
 };
 
@@ -23,7 +25,8 @@ type Story = StoryObj<typeof Tag>;
 
 // extractShownFixtures transforms raw govuk-frontend fixture data into
 // React-compatible props (e.g. text → children, classes → className).
-const examplesFromFixtures: Array<ComponentFixture> = extractShownFixtures(fixtures);
+const examplesFromFixtures: Array<ComponentFixture> =
+  extractShownFixtures(fixtures);
 
 export const Default: Story = {
   name: "default",
@@ -37,7 +40,9 @@ export const Grey: Story = {
 
 export const Turquoise: Story = {
   name: "turquoise",
-  args: { ...examplesFromFixtures.find((f) => f.name === "turquoise")?.options },
+  args: {
+    ...examplesFromFixtures.find((f) => f.name === "turquoise")?.options,
+  },
 };
 
 export const Green: Story = {

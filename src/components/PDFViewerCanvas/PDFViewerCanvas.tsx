@@ -18,6 +18,11 @@ const PDFViewerCanvas: React.FC<PDFViewerCanvasProps> = ({
   documentName,
   pageNumber = 1,
   showNavigation = true,
+  buttonColour,
+  buttonTextColour,
+  buttonShadowColour,
+  buttonHoverColour,
+  buttonHoverTextColour,
   ...attributes
 }) => {
   const [pdfState, setPdfState] = useState({
@@ -141,6 +146,11 @@ const PDFViewerCanvas: React.FC<PDFViewerCanvasProps> = ({
             totalDifferences={pdfState.numberOfPages}
             keyword="page"
             plural="Pages"
+            buttonColour={buttonColour}
+            buttonTextColour={buttonTextColour}
+            buttonShadowColour={buttonShadowColour}
+            buttonHoverColour={buttonHoverColour}
+            buttonHoverTextColour={buttonHoverTextColour}
           />
         </div>
       )}

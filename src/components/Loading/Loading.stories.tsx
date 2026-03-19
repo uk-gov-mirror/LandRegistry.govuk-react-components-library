@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 export default {
-  title: "ReactComponentLibrary/Loading",
+  title: "React Component Library/Loading",
   component: Loading,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
