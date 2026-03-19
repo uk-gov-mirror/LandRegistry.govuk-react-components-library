@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/LandRegistry/govuk-react-components-library/compare/v1.1.0...v1.2.0) (2026-03-19)
+
+
+### Features
+
+* update components to align with brand color from govuk-frontend v6 ([dd62240](https://github.com/LandRegistry/govuk-react-components-library/commit/dd62240fa332be20984e0cff394262442ceb5b79))
+* update govuk-frontend ([9bfae3a](https://github.com/LandRegistry/govuk-react-components-library/commit/9bfae3a3c012e25ddccacb6e5b4f596194a6298b))
+
 ## [1.1.0](https://github.com/LandRegistry/govuk-react-components-library/compare/v1.0.3...v1.1.0) (2026-03-18)
 
 ### Features
