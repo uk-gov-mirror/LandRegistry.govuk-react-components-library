@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Run format before commit
+npm run format
+
 # Run lint before commit
 npm run lint
 
