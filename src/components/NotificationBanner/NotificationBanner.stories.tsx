@@ -5,7 +5,7 @@
 import React from "react";
 import "./NotificationBanner.scss";
 import NotificationBanner from "./NotificationBanner";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/notification-banner/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof NotificationBanner> = {
           "path=/docs/govuk-design-system-notification-banner--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallNotificationBanner();
+          void ConfigureOverallNotificationBanner();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallNotificationBanner();
+          void ConfigureOverallNotificationBanner();
         }
       }, []);
       return <Story />;

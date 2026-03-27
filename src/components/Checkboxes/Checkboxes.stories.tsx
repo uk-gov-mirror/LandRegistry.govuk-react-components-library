@@ -5,7 +5,7 @@
 import React from "react";
 import "./Checkboxes.scss";
 import Checkboxes from "./Checkboxes";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/checkboxes/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof Checkboxes> = {
           "path=/docs/govuk-design-system-checkboxes--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallCheckboxes();
+          void ConfigureOverallCheckboxes();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallCheckboxes();
+          void ConfigureOverallCheckboxes();
         }
       }, []);
       return <Story />;

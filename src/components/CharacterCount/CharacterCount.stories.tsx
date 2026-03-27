@@ -5,7 +5,7 @@
 import React from "react";
 import "./CharacterCount.scss";
 import CharacterCount from "./CharacterCount";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/character-count/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof CharacterCount> = {
           "path=/docs/govuk-design-system-character-count--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallCharacterCount();
+          void ConfigureOverallCharacterCount();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallCharacterCount();
+          void ConfigureOverallCharacterCount();
         }
       }, []);
       return <Story />;

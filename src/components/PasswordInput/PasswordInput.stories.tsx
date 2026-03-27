@@ -5,7 +5,7 @@
 import React from "react";
 import "./PasswordInput.scss";
 import PasswordInput from "./PasswordInput";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/password-input/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof PasswordInput> = {
           "path=/docs/govuk-design-system-password-input--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallPasswordInput();
+          void ConfigureOverallPasswordInput();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallPasswordInput();
+          void ConfigureOverallPasswordInput();
         }
       }, []);
       return <Story />;

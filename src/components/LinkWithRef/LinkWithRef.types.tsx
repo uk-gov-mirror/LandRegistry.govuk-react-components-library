@@ -1,5 +1,5 @@
 import React, { AnchorHTMLAttributes } from "react";
-import { To } from "react-router-dom";
+import { To } from "react-router";
 
 export interface LinkWithRefProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;

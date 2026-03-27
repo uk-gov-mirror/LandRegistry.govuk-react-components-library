@@ -5,7 +5,7 @@
 import React from "react";
 import "./Radios.scss";
 import Radios from "./Radios";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/radios/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof Radios> = {
           "path=/docs/govuk-design-system-radios--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallRadios();
+          void ConfigureOverallRadios();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallRadios();
+          void ConfigureOverallRadios();
         }
       }, []);
       return <Story />;

@@ -1,5 +1,5 @@
 import React from "react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { expect, afterEach, describe, test } from "@jest/globals";
 

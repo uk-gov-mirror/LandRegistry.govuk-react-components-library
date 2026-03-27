@@ -2,7 +2,7 @@ import React from "react";
 import CardColumn from "./CardColumn";
 import { expect, describe, test, afterEach } from "@jest/globals";
 import { cleanup, render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 
 afterEach(() => {
   cleanup();

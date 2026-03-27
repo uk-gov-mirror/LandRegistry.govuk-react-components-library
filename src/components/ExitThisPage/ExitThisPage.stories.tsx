@@ -5,7 +5,7 @@
 import React from "react";
 import "./ExitThisPage.scss";
 import ExitThisPage from "./ExitThisPage";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/exit-this-page/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof ExitThisPage> = {
           "path=/docs/govuk-design-system-exit-this-page--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallExitThisPage();
+          void ConfigureOverallExitThisPage();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallExitThisPage();
+          void ConfigureOverallExitThisPage();
         }
       }, []);
       return <Story />;

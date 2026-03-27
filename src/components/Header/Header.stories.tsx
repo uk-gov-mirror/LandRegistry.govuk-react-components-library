@@ -5,7 +5,7 @@
 import React from "react";
 import "./Header.scss";
 import Header from "./Header";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/header/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof Header> = {
           "path=/docs/govuk-design-system-header--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallHeader();
+          void ConfigureOverallHeader();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallHeader();
+          void ConfigureOverallHeader();
         }
       }, []);
       return <Story />;

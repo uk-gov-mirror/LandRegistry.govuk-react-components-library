@@ -1,6 +1,6 @@
 import React from "react";
 import { MemoryRouter, Routes } from "react-router";
-import { Route } from "react-router-dom";
+import { Route } from "react-router";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import {
   expect,

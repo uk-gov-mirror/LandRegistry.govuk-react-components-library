@@ -1,3 +1,4 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 // .storybook/main.ts
 import { createRequire } from "node:module";
 import { dirname } from "node:path";
@@ -111,7 +112,11 @@ const config: StorybookConfig = {
     return config;
   },
   docs: {},
-  typescript: { reactDocgen: "react-docgen-typescript" },
+  typescript: {
+    reactDocgenTypescriptOptions: {
+      tsConfigPath: "./tsconfig.storybook.json",
+    },
+  },
   staticDirs: [
     "./public",
     {

@@ -5,7 +5,7 @@
 import React from "react";
 import "./ErrorSummary.scss";
 import ErrorSummary from "./ErrorSummary";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/error-summary/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof ErrorSummary> = {
           "path=/docs/govuk-design-system-error-summary--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallErrorSummary();
+          void ConfigureOverallErrorSummary();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallErrorSummary();
+          void ConfigureOverallErrorSummary();
         }
       }, []);
       return <Story />;

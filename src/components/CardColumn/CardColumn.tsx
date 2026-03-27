@@ -1,6 +1,6 @@
 import React from "react";
 import "./CardColumn.scss";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Card from "react-bootstrap/Card";
 import { CardColumnProps } from "./CardColumn.types";
 

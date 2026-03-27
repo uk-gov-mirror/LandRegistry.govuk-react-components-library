@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { LandingProps } from "./Landing.types";
 import { Main } from "../Main";
 

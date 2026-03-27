@@ -1,7 +1,7 @@
 import React from "react";
 import { StoryFn, Meta } from "@storybook/react-vite";
 import { MemoryRouter, Routes } from "react-router";
-import { Route } from "react-router-dom";
+import { Route } from "react-router";
 import Landing from "./Landing";
 
 const DashboardPage: React.FC = () => {

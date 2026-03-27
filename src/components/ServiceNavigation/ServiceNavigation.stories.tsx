@@ -5,7 +5,7 @@
 import React from "react";
 import "./ServiceNavigation.scss";
 import ServiceNavigation from "./ServiceNavigation";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/service-navigation/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";

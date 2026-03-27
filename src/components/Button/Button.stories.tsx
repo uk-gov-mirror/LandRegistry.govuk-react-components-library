@@ -5,7 +5,7 @@
 import React from "react";
 import "./Button.scss";
 import Button from "./Button";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/button/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof Button> = {
           "path=/docs/govuk-design-system-button--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallButton();
+          void ConfigureOverallButton();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallButton();
+          void ConfigureOverallButton();
         }
       }, []);
       return <Story />;

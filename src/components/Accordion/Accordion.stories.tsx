@@ -5,7 +5,7 @@
 import React from "react";
 import "./Accordion.scss";
 import Accordion from "./Accordion";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/accordion/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof Accordion> = {
           "path=/docs/govuk-design-system-accordion--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallAccordion();
+          void ConfigureOverallAccordion();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallAccordion();
+          void ConfigureOverallAccordion();
         }
       }, []);
       return <Story />;

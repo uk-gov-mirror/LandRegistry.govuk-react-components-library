@@ -5,7 +5,7 @@
 import React from "react";
 import "./Breadcrumbs.scss";
 import Breadcrumbs from "./Breadcrumbs";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/breadcrumbs/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";

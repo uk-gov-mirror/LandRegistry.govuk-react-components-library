@@ -156,10 +156,10 @@ function buildConfigFileCustomisation(componentName) {
       React.useEffect(() => {
         const isDocsMode = window.location.search.includes("${docsPath}");
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ${fnName}();
+          void ${fnName}();
           configured = true;
         } else if (!isDocsMode) {
-          ${fnName}();
+          void ${fnName}();
         }
       }, []);
       return <Story />;
@@ -290,7 +290,7 @@ function generateFile(componentName, visibleFixtures) {
     `import React from "react";`,
     hasScss ? `import "./${componentName}.scss";` : null,
     `import ${componentName} from "./${componentName}";`,
-    `import { Meta, StoryObj } from "@storybook/${STORYBOOK_FRAMEWORK}";`,
+    `import { Meta, StoryObj } from "@storybook/react";`,
     `import fixtures from "govuk-frontend/dist/govuk/components/${fixtureName}/fixtures.json";`,
     `import { extractShownFixtures } from "../../utils/ProcessExampleData";`,
     `import { ComponentFixture } from "../../dynamics";`,

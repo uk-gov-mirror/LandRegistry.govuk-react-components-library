@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { To } from "react-router-dom";
+import { To } from "react-router";
 
 export interface NavigationItem {
   columns: string | number;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { WarningInfoProps } from "./WarningInfo.types";
 import { Main } from "../Main";
 import { LinkWithRef } from "../LinkWithRef";

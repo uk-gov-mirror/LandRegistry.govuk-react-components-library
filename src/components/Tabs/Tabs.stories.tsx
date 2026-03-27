@@ -5,7 +5,7 @@
 import React from "react";
 import "./Tabs.scss";
 import Tabs from "./Tabs";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from "@storybook/react";
 import fixtures from "govuk-frontend/dist/govuk/components/tabs/fixtures.json";
 import { extractShownFixtures } from "../../utils/ProcessExampleData";
 import { ComponentFixture } from "../../dynamics";
@@ -22,10 +22,10 @@ const meta: Meta<typeof Tabs> = {
           "path=/docs/govuk-design-system-tabs--docs",
         );
         if (isDocsMode && !configured && parameters.initializeConfigurations) {
-          ConfigureOverallTabs();
+          void ConfigureOverallTabs();
           configured = true;
         } else if (!isDocsMode) {
-          ConfigureOverallTabs();
+          void ConfigureOverallTabs();
         }
       }, []);
       return <Story />;

@@ -3,7 +3,7 @@ import CardLayout from "./CardLayout";
 import CardLayoutProps from "./CardLayout.types";
 import { expect, describe, test, afterEach } from "@jest/globals";
 import { cleanup, render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 import { CardColumnProps } from "../CardColumn/CardColumn.types";
 
 afterEach(() => {

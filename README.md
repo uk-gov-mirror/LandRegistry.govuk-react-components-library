@@ -43,7 +43,7 @@ The Components includes:
 - [Fieldset](./src/components/Fieldset/Fieldset.tsx)
 - [FileUpload](./src/components/FileUpload/FileUpload.tsx)
 - [Footer](./src/components/Footer/Footer.tsx)
-- [Header](./src/components/Header/Header.tsx) `👈🏽`
+- [Header](./src/components/Header/Header.tsx)
 - [Hint](./src/components/Hint/Hint.tsx)
 - [Input](./src/components/Input/Input.tsx)
 - [InsetText](./src/components/InsetText/InsetText.tsx)
@@ -92,13 +92,19 @@ There are also some useful components :
 
 There are some convenience functions that can be used to configure components with `👈🏽` mentioned above.
 
+> **`govuk-frontend` version compatibility note**
+>
+> The `👈🏽` marker and the convenience functions below apply to components that require JavaScript initialisation via `createAll` or `initAll`. This applies to **`govuk-frontend` v5+**, which is the minimum supported version of this library.
+>
+> One exception is the **Header** component. In `govuk-frontend` v5+, the Header's mobile navigation menu toggle is handled entirely by the browser using a native `<details>`/`<summary>` element — **no JavaScript initialisation is required**. `ConfigureOverallHeader` is therefore a no-op in v5+ and the `Header` component does not carry the `👈🏽` marker. If you are consuming an older fork pinned to `govuk-frontend` v4 or earlier, you will still need to call `ConfigureOverallHeader()` (or `createAll(Header, ...)` directly) to activate the menu toggle.
+
 - [ExtractAccordionConfigFromAttributes](./src/components/Accordion/Accordion.config.tsx) - Extracts Accordion configurations from fixtures attributes e.g. `showAllSectionsText` translates to `showAllSections` in `AccordionConfig`.
 - [ConfigureOverallAccordion](./src/components/Accordion/Accordion.config.tsx) - Sets overall behavior and configurations for all accordions or in a scope (document or specified element) as per [govuk-frontend accordion api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#accordion).
 - [ConfigureOverallButton](./src/components/Button/Button.config.tsx) - Sets overall behavior and configurations for all button or in a scope (document or specified element) as per [govuk-frontend button api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#button).
 - [ConfigureOverallCheckboxes](./src/components/Checkboxes/Checkboxes.config.tsx) - Sets overall behavior and configurations for all checkboxes or in a scope.
 - [ConfigureOverallErrorSummary](./src/components/ErrorSummary/ErrorSummary.config.tsx) - Sets overall behavior and configurations for all error summary or in a scope (document or specified element) as per [govuk-frontend error-summary api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#errorsummary).
 - [ConfigureOverallExitThisPage](./src/components/ExitThisPage/ExitThisPage.config.ts) - Initialises the Exit This Page component or in a scope (document or specified element) as per [govuk-frontend exit-this-page api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#exit-this-page).
-- [ConfigureOverallHeader](./src/components/Header/Header.config.tsx) - Sets overall behavior and configurations for all Header or in a scope.
+- [ConfigureOverallHeader](./src/components/Header/Header.config.tsx) - **Deprecated / no-op for `govuk-frontend` v5+.** In v5, the Header's mobile menu toggle is implemented using a native `<details>`/`<summary>` element and requires no JavaScript initialisation. `ConfigureOverallHeader` is retained as an empty stub for backwards compatibility only. If you are using `govuk-frontend` v4 or earlier, this function remains necessary and calls `createAll(Header, ...)` as before.
 - [ConfigureOverallRadios](./src/components/Radios/Radios.config.tsx) - Sets overall behavior and configurations for all Radios or in a scope.
 - [ConfigureOverallPasswordInput](./src/components/PasswordInput/PasswordInput.config.ts) - Initialises the Password Input show/hide toggle or in a scope (document or specified element) as per [govuk-frontend password-input api reference](https://frontend.design-system.service.gov.uk/javascript-api-reference/#password-input).
 - [ConfigureOverallSkipLink](./src/components/SkipLink/SkipLink.config.tsx) - Sets overall behavior and configurations for all SkipLink or in a scope.
